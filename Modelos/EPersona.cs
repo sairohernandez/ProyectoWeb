@@ -8,24 +8,24 @@ namespace PrograWeb.Modelos
     public class EPersona
     {
         public int codigoUsuario { get; set; }
-        public int identificacionUsuario { get; set; }
-        public int nombreUsuario { get; set; }
-        public int apellidosUsuario { get; set; }
-        public int correoUsuario { get; set; }
+        public string identificacionUsuario { get; set; }
+        public string nombreUsuario { get; set; }
+        public string apellidosUsuario { get; set; }
+        public string correoUsuario { get; set; }
 
-        public int fechaNacUsuario { get; set; }
+        public DateTime fechaNacUsuario { get; set; }
         
         public string telefonoUsuario { get; set; }
 
-        public int direccionUsuario { get; set; }
+        public string direccionUsuario { get; set; }
 
-        public int claveUsuario { get; set; }
-        public int vencimientoClave { get; set; }
+        public string claveUsuario { get; set; }
+        public DateTime vencimientoClave { get; set; }
         
-        public int tipoUsuario { get; set; }
+        public string tipoUsuario { get; set; }
 
-        public int fechaRegUsuario { get; set; }
-        public int limiteCreditoUsuario { get; set; }
+        public DateTime fechaRegUsuario { get; set; }
+        public double limiteCreditoUsuario { get; set; }
         public int estadoUsuario { get; set; }
 
     }

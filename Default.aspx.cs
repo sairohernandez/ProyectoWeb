@@ -15,11 +15,12 @@ namespace PrograWeb
     public partial class Default : System.Web.UI.Page
     {
 
-        MySqlConnection conn;
-        string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+        //MySqlConnection conn;
+        //string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            /*
             conn = new MySqlConnection(myConnectionString);
 
             conn.Open();
@@ -33,6 +34,7 @@ namespace PrograWeb
             Da.Fill(dt);
 
             TextBox1.Text = dt.Rows[0][0].ToString();
+            */
 
 
         }

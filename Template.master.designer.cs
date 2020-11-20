@@ -11,10 +11,12 @@
 namespace PrograWeb {
 	
 	
-	public partial class Default {
+	public partial class Template {
 		
-		protected System.Web.UI.WebControls.Content Content1;
+		protected System.Web.UI.WebControls.ContentPlaceHolder head;
 		
-		protected System.Web.UI.WebControls.Content Content2;
+		protected System.Web.UI.HtmlControls.HtmlGenericControl mainContainer;
+		
+		protected System.Web.UI.WebControls.ContentPlaceHolder contentPlaceHolder;
 	}
 }

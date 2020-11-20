@@ -6,6 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
 using PrograWeb.Modelos;
+using System.Data;
 
 namespace PrograWeb.Datos
 {
@@ -16,7 +17,7 @@ namespace PrograWeb.Datos
         string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
 
 
-        public bool GuardarSolicitudCredito(EPersona solicitud)
+        public int GuardarSolicitudCredito(EPersona solicitud)
         {
 
             try
@@ -27,11 +28,34 @@ namespace PrograWeb.Datos
                 {
                     connection.Open();
 
-                    string sql = "INSERT  Usuarios " +
-                        "VALUES(codigoUsuario,@identificacionUsuario,@nombreUsuario,@apellidosUsuario,@fechaNacUsuario," +
-                        "@correoUsuario,@telefonoUsuario,@direccionUsuario,@claveUsuario," +
-                         "@vencimientoClave,@tipoUsuario,@fechaRegUsuario,@limiteCreditoUsuario,@estadoUsuario);";
-                    
+                    string sql;
+
+                    sql = "select estadousuario from Usuarios where identificacionUsuario = @identificacionUsuario";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.Add("@identificacionUsuario", MySqlDbType.VarChar, 50).Value = solicitud.identificacionUsuario;
+                        DataTable dt = new DataTable();
+                        MySqlDataAdapter Da = new MySqlDataAdapter();
+                        Da.SelectCommand = cmd;
+                        Da.Fill(dt);
+
+                        if (dt.Rows.Count > 0)
+                        {
+                            if (int.Parse(dt.Rows[0][0].ToString()) == 1 || int.Parse(dt.Rows[0][0].ToString()) == 3)
+                            {
+
+                                return 3;
+                            }
+                        }
+
+
+                    }
+                    sql = "INSERT  Usuarios " +
+                    "VALUES(codigoUsuario,@identificacionUsuario,@nombreUsuario,@apellidosUsuario,@fechaNacUsuario," +
+                    "@correoUsuario,@telefonoUsuario,@direccionUsuario,@claveUsuario," +
+                    "@vencimientoClave,@tipoUsuario,@fechaRegUsuario,@limiteCreditoUsuario,@estadoUsuario);";
+
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
                         cmd.Parameters.Add("@codigoUsuario", MySqlDbType.Int32).Value = 0;
@@ -40,7 +64,7 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@apellidosUsuario", MySqlDbType.VarChar).Value = solicitud.apellidosUsuario;
                         cmd.Parameters.Add("@fechaNacUsuario", MySqlDbType.DateTime, 50).Value = solicitud.fechaNacUsuario;
                         cmd.Parameters.Add("@correoUsuario", MySqlDbType.VarChar, 50).Value = solicitud.correoUsuario;
-                        cmd.Parameters.Add("@telefonoUsuario", MySqlDbType.VarChar,10).Value = solicitud.telefonoUsuario;
+                        cmd.Parameters.Add("@telefonoUsuario", MySqlDbType.VarChar, 10).Value = solicitud.telefonoUsuario;
                         cmd.Parameters.Add("@direccionUsuario", MySqlDbType.VarChar, 500).Value = solicitud.direccionUsuario;
                         cmd.Parameters.Add("@claveUsuario", MySqlDbType.VarChar, 50).Value = "";
                         cmd.Parameters.Add("@vencimientoClave", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
@@ -50,17 +74,18 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@estadoUsuario", MySqlDbType.Int32, 50).Value = 3;
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
+
                     }
+
                 }
 
+                return 1;
 
-               return true;
-
-            }   
+            }
             catch (Exception e)
             {
-              
-                return false;
+
+                return 0;
             }
 
 

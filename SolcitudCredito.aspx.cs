@@ -13,29 +13,48 @@ namespace PrograWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-  
+
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-          //  EPersona solicitud = new EPersona ();
-           
-          //  solicitud.identificacionUsuario = txtIdentificacion.Text;
-          //  solicitud.nombreUsuario = txtNombre.Text;
-          //  solicitud.apellidosUsuario = txtApellidos.Text;
-          //  solicitud.fechaNacUsuario = DateTime.Parse(txtFechaNacimiento.Text);
-          //  solicitud.direccionUsuario = txtDireccionExacta.Text;
-          //  solicitud.telefonoUsuario = txtTelefono.Text;
-          //  solicitud.correoUsuario = txtCorreo.Text;
+            EPersona solicitud = new EPersona();
 
-          //  DPersona datosPersona = new DPersona();
-          //if   (datosPersona.GuardarSolicitudCredito(solicitud))
+            solicitud.identificacionUsuario = txtIdentificacion.Text;
+            solicitud.nombreUsuario = txtNombre.Text;
+            solicitud.apellidosUsuario = txtApellidos.Text;
+            solicitud.fechaNacUsuario = DateTime.Parse(txtFechaNacimiento.Text);
+            solicitud.direccionUsuario = txtDireccionExacta.Text;
+            solicitud.telefonoUsuario = txtTelefono.Text;
+            solicitud.correoUsuario = txtCorreo.Text;
 
-          //  {
-                string script = "myFuncionAlerta();";
+            DPersona datosPersona = new DPersona();
+            int respuesta = datosPersona.GuardarSolicitudCredito(solicitud);
+
+            if (respuesta == 1)
+
+            {
+                string script = "mensajeCorrecto();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-            //}
-                
+            }
+            else if (respuesta == 3)
+            {
+                string script = "mensajeExisteRegistro();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
+
+            LimpiarPantalla();
+        }
+
+        void LimpiarPantalla()
+        {
+            txtIdentificacion.Text = "";
+            txtNombre.Text = "";
+            txtApellidos.Text = "";
+            txtFechaNacimiento.Text = "";
+            txtDireccionExacta.Text = "";
+            txtTelefono.Text = "";
+            txtCorreo.Text = "";
         }
     }
 }

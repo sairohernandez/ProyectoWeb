@@ -38,7 +38,7 @@
             <div class="card-header h3">
                 Solicitud de crédito
             </div>
-            <form id="form1" runat="server" class="needs-validation">
+            <form id="form2" runat="server" class="needs-validation">
                 <div class="card-body">
 
                     <p class="h5">Datos Personales</p>

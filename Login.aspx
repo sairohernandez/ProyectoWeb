@@ -10,7 +10,7 @@
         <div class="form-group row">
             <div class="col-8 mx-auto">
                 <div class="card">
-                    <form id="form1" runat="server">
+                    <form id="form2" runat="server">
                         <div class="card-body">
 
                             <div class="form-group row">

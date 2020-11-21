@@ -15,6 +15,14 @@ namespace PrograWeb {
 		
 		protected System.Web.UI.WebControls.ContentPlaceHolder head;
 		
+		protected System.Web.UI.HtmlControls.HtmlForm form1;
+		
+		protected System.Web.UI.WebControls.Label Label_Username;
+		
+		protected System.Web.UI.WebControls.LinkButton Link_Login;
+		
+		protected System.Web.UI.WebControls.LinkButton Link_Logout;
+		
 		protected System.Web.UI.HtmlControls.HtmlGenericControl mainContainer;
 		
 		protected System.Web.UI.WebControls.ContentPlaceHolder contentPlaceHolder;

@@ -13,7 +13,7 @@
         <asp:ContentPlaceHolder ID="head" runat="server" />
     </head>
     <body>
-        <header class="bg-dark fixed-top">
+        <header class="bg-dark">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                     <a class="navbar-brand" runat="server" href="~/Default.aspx">TICO CICLOS</a>
@@ -37,11 +37,15 @@
                             </li>
                         </ul>
                         <span class="navbar-text">
-                            <a class="nav-link d-inline-block" runat="server" href="~/Login.aspx">Inicio de Sesión</a>
-                            &nbsp;
-                            <a class="btn btn-outline-success" href="#" role="button">
-                                <i class="fas fa-shopping-cart"></i>
-                            </a>
+                            <form id="form1" runat="server">
+                                <asp:Label ID="Label_Username" runat="server" class="nav-link d-inline-block" Text=""/>
+                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" href="~/Login.aspx">Inicio de Sesión</asp:LinkButton> 
+                                <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
+                                &nbsp;
+                                <a class="btn btn-outline-success" href="#" role="button">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </a>
+                            </form>
                         </span>
                     </div>
                 </nav>

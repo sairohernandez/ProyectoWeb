@@ -15,13 +15,13 @@ namespace PrograWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Label_Error.Visible = false;
         }
 
         protected void Submit_Click(object sender, EventArgs e)
 
         {
-
+            Label_Error.Visible = false;
             MySqlConnection conn = new MySqlConnection("server=remotemysql.com;port=3306;database=JU7v5Dpmc3;user id=JU7v5Dpmc3; password=80JwZf6LER");
 
             conn.Open();
@@ -44,7 +44,8 @@ namespace PrograWeb
 
             conn.Close();
 
-            Label_Error.Text = "Username/Password Incorrect";
+            Label_Error.Text = "Usuario o Password incorrectos";
+            Label_Error.Visible = true;
 
             //String User = TextBox_Username.Text;
             //String Password = TextBox_Password.Text;

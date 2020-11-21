@@ -145,22 +145,34 @@
     <Content Include="Web.config" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\misestilos.css" />
-    <Content Include="css\fontawesome\all.css" />
-    <Content Include="css\fontawesome\all.min.css" />
-    <Content Include="css\fontawesome\brands.css" />
-    <Content Include="css\fontawesome\brands.min.css" />
-    <Content Include="css\fontawesome\fontawesome.css" />
-    <Content Include="css\fontawesome\fontawesome.min.css" />
-    <Content Include="css\fontawesome\regular.css" />
-    <Content Include="css\fontawesome\regular.min.css" />
-    <Content Include="css\fontawesome\solid.css" />
-    <Content Include="css\fontawesome\solid.min.css" />
-    <Content Include="css\fontawesome\svg-with-js.css" />
-    <Content Include="css\fontawesome\svg-with-js.min.css" />
-    <Content Include="css\fontawesome\v4-shims.css" />
-    <Content Include="css\fontawesome\v4-shims.min.css" />
     <Content Include="css\theme.css" />
     <Content Include="Template.master" />
+    <Content Include="css\fontawesome\css\all.css" />
+    <Content Include="css\fontawesome\css\all.min.css" />
+    <Content Include="css\fontawesome\css\brands.css" />
+    <Content Include="css\fontawesome\css\brands.min.css" />
+    <Content Include="css\fontawesome\css\fontawesome.css" />
+    <Content Include="css\fontawesome\css\fontawesome.min.css" />
+    <Content Include="css\fontawesome\css\regular.css" />
+    <Content Include="css\fontawesome\css\regular.min.css" />
+    <Content Include="css\fontawesome\css\solid.css" />
+    <Content Include="css\fontawesome\css\solid.min.css" />
+    <Content Include="css\fontawesome\css\svg-with-js.css" />
+    <Content Include="css\fontawesome\css\svg-with-js.min.css" />
+    <Content Include="css\fontawesome\css\v4-shims.css" />
+    <Content Include="css\fontawesome\css\v4-shims.min.css" />
+    <Content Include="css\fontawesome\webfonts\fa-brands-400.eot" />
+    <Content Include="css\fontawesome\webfonts\fa-brands-400.svg" />
+    <Content Include="css\fontawesome\webfonts\fa-brands-400.ttf" />
+    <Content Include="css\fontawesome\webfonts\fa-brands-400.woff" />
+    <Content Include="css\fontawesome\webfonts\fa-regular-400.eot" />
+    <Content Include="css\fontawesome\webfonts\fa-regular-400.svg" />
+    <Content Include="css\fontawesome\webfonts\fa-regular-400.ttf" />
+    <Content Include="css\fontawesome\webfonts\fa-regular-400.woff" />
+    <Content Include="css\fontawesome\webfonts\fa-solid-900.eot" />
+    <Content Include="css\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="css\fontawesome\webfonts\fa-solid-900.ttf" />
+    <Content Include="css\fontawesome\webfonts\fa-solid-900.woff" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\DPersona.cs" />
@@ -203,6 +215,12 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <None Include="css\.DS_Store" />
+    <None Include="css\fontawesome\.DS_Store" />
+    <None Include="css\fontawesome\css\.DS_Store" />
+    <None Include="css\fontawesome\webfonts\fa-brands-400.woff2" />
+    <None Include="css\fontawesome\webfonts\fa-regular-400.woff2" />
+    <None Include="css\fontawesome\webfonts\fa-solid-900.woff2" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup>

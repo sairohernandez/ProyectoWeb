@@ -37,7 +37,7 @@
                             </li>
                         </ul>
                         <span class="navbar-text">
-                            <a class="nav-link d-inline-block" runat="server" href="~/login.aspx">Inicio de Sesión / Registrarse</a>
+                            <a class="nav-link d-inline-block" runat="server" href="~/Login.aspx">Inicio de Sesión</a>
                             &nbsp;
                             <a class="btn btn-outline-success" href="#" role="button">
                                 <i class="fas fa-shopping-cart"></i>

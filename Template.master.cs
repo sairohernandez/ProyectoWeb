@@ -26,6 +26,11 @@ namespace PrograWeb
             }
         }
 
+        protected void IBLogin_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Login.aspx");
+        }
+
         protected void IBLogout_Click(object sender, EventArgs e)
         {
             Session["nombreUsuario"] = "";

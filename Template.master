@@ -39,7 +39,7 @@
                         <span class="navbar-text">
                             <form id="form1" runat="server">
                                 <asp:Label ID="Label_Username" runat="server" class="nav-link d-inline-block" Text=""/>
-                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" href="~/Login.aspx">Inicio de Sesión</asp:LinkButton> 
+                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Inicio de Sesión</asp:LinkButton> 
                                 <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
                                 &nbsp;
                                 <a class="btn btn-outline-success" href="#" role="button">

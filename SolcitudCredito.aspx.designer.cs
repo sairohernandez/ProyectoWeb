@@ -17,8 +17,6 @@ namespace PrograWeb {
 		
 		protected System.Web.UI.WebControls.Content Content2;
 		
-		protected System.Web.UI.HtmlControls.HtmlForm form2;
-		
 		protected System.Web.UI.WebControls.Label Label3;
 		
 		protected System.Web.UI.WebControls.TextBox txtIdentificacion;

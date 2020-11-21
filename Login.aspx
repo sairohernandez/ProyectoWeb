@@ -10,30 +10,28 @@
         <div class="form-group row">
             <div class="col-8 mx-auto">
                 <div class="card">
-                    <form id="form2" runat="server">
-                        <div class="card-body">
+                    <div class="card-body">
 
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <asp:Label ID="Label_Username" runat="server" Text="Usuario"/>
-                                    <asp:TextBox ID="TextBox_Username" class="form-control" placeholder="Usuario" runat="server"/>
-                                </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <asp:Label ID="Label_Username" runat="server" Text="Usuario"/>
+                                <asp:TextBox ID="TextBox_Username" class="form-control" placeholder="Usuario" runat="server"/>
                             </div>
+                        </div>
 
-                            <div class="form-group row">
-                                <div class="col-12">
-                                    <asp:Label ID="Label_Password" runat="server" Text="Password"/>
-                                    <asp:TextBox ID="TextBox_Password" class="form-control" placeholder="Password" runat="server" TextMode="Password"/>
-                                </div>
+                        <div class="form-group row">
+                            <div class="col-12">
+                                <asp:Label ID="Label_Password" runat="server" Text="Password"/>
+                                <asp:TextBox ID="TextBox_Password" class="form-control" placeholder="Password" runat="server" TextMode="Password"/>
                             </div>
-
-                            <asp:Label ID="Label_Error" runat="server" class="alert alert-danger d-block w-100 text-center" Text=""/>
-
                         </div>
-                        <div class="card-footer text-center">
-                            <asp:Button id="Submit" class="btn btn-lg btn-success" Onclick="Submit_Click" runat="server" Text="Entrar"/>
-                        </div>
-                    </form>
+
+                        <asp:Label ID="Label_Error" runat="server" class="alert alert-danger d-block w-100 text-center" Text=""/>
+
+                    </div>
+                    <div class="card-footer text-center">
+                        <asp:Button id="Submit" class="btn btn-lg btn-success" Onclick="Submit_Click" runat="server" Text="Entrar"/>
+                    </div>
                 </div>
             </div>
         </div>

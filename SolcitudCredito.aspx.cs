@@ -13,7 +13,9 @@ namespace PrograWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Convert.ToString(Session["nombreUsuario"]) == "") {
+                
+            }
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)

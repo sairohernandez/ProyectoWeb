@@ -144,7 +144,6 @@
     <Content Include="SolcitudCredito.aspx" />
     <Content Include="Web.config" />
     <Content Include="css\bootstrap.min.css" />
-    <Content Include="css\misestilos.css" />
     <Content Include="css\theme.css" />
     <Content Include="Template.master" />
     <Content Include="css\fontawesome\css\all.css" />
@@ -173,8 +172,10 @@
     <Content Include="css\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="css\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="css\fontawesome\webfonts\fa-solid-900.woff" />
+    <Content Include="carritoCompras.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\DFactura.cs" />
     <Compile Include="Datos\DPersona.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -190,6 +191,9 @@
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Modelos\EFacturaDetalle.cs" />
+    <Compile Include="Modelos\EFacturaEncabezado.cs" />
+    <Compile Include="Modelos\EMarca.cs" />
     <Compile Include="Modelos\EPersona.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SolcitudCredito.aspx.cs">
@@ -205,6 +209,13 @@
     </Compile>
     <Compile Include="Template.master.designer.cs">
       <DependentUpon>Template.master</DependentUpon>
+    </Compile>
+    <Compile Include="carritoCompras.aspx.cs">
+      <DependentUpon>carritoCompras.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="carritoCompras.aspx.designer.cs">
+      <DependentUpon>carritoCompras.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

@@ -13,14 +13,22 @@ namespace PrograWeb
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        DFactura DatosFactura = new DFactura();
+        DFactura DatosFactura ;
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
             if (!this.IsPostBack)
             {
 
-                Session["GridView"] = DatosFactura.ObtenerCarrito();
+                DatosFactura = new DFactura();
+
+                DatosFactura.EFactura.LEFacturadetalle = DatosFactura.ObtenerCarrito();
+
+                Session["GridView"] = DatosFactura.EFactura.LEFacturadetalle;
+
+
                 llenarGrid();
             
             }
@@ -37,11 +45,15 @@ namespace PrograWeb
 
                 //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Name: " + name + "\\nCountry: " + country + "');", true);
 
+                DatosFactura = new DFactura();
+                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
-                List<EFacturaDetalle> dt = (List<EFacturaDetalle>)Session["GridView"];
+                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
 
-    
-                dt[rowIndex].cantidadDetalle += 1;
+                //pedidoCliente.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
+
+
+
 
 
                 //GridView1.EditIndex = -1;
@@ -54,9 +66,12 @@ namespace PrograWeb
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                List<EFacturaDetalle> dt = (List<EFacturaDetalle>)Session["GridView"];
+                DatosFactura = new DFactura();
+                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
-                dt[rowIndex].cantidadDetalle -= 1;
+                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
+
+                //pedidoCliente.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
 
                 llenarGrid();
             }
@@ -65,19 +80,29 @@ namespace PrograWeb
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                List<EFacturaDetalle> dt = (List<EFacturaDetalle>)Session["GridView"];
+                DatosFactura = new DFactura();
+                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
-                dt.RemoveAt(rowIndex);
+                DatosFactura.EFactura.LEFacturadetalle.RemoveAt(rowIndex);
 
                 llenarGrid();
             }
         }
         private void llenarGrid()
         {
-            GridView1.DataSource = Session["GridView"];
+
+          
+            DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
+            GridView1.DataSource = DatosFactura.EFactura.LEFacturadetalle;
             GridView1.DataBind();
+
+            LtotalFactura.Text = "¢"+DatosFactura.EFactura.totalFactura.ToString("N2");
         }
 
+        protected void btnGuardarCompra_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

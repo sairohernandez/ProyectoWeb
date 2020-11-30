@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using System.Configuration;
 using PrograWeb.Modelos;
-using System.Data;
+
 
 namespace PrograWeb.Datos
 {
@@ -52,7 +52,7 @@ namespace PrograWeb.Datos
 
                     }
                     sql = "INSERT  Usuarios " +
-                    "VALUES(codigoUsuario,@identificacionUsuario,@nombreUsuario,@apellidosUsuario,@fechaNacUsuario," +
+                    "VALUES(@codigoUsuario,@identificacionUsuario,@nombreUsuario,@apellidosUsuario,@fechaNacUsuario," +
                     "@correoUsuario,@telefonoUsuario,@direccionUsuario,@claveUsuario," +
                     "@vencimientoClave,@tipoUsuario,@fechaRegUsuario,@limiteCreditoUsuario,@estadoUsuario);";
 
@@ -78,7 +78,7 @@ namespace PrograWeb.Datos
                     }
 
                 }
-
+                connection.Close();
                 return 1;
 
             }

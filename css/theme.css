@@ -7,7 +7,7 @@ body {
     margin-bottom: 60px;
 }
 
-body > .container > .content {
+body .container > .content {
     padding: 30px 0px 50px 0px;
 }
 

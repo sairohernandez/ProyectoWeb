@@ -188,6 +188,12 @@
     <Content Include="images\186200-XS-scaled.jpg" />
     <Content Include="images\C11249M1052-DA.png" />
     <Content Include="images\201901-e1603984526648.png" />
+    <Content Include="images\homepage\ciclo-banner-1.jpg" />
+    <Content Include="images\homepage\ciclo-banner-2.jpg" />
+    <Content Include="css\slider\jquery.bxslider.min.css" />
+    <Content Include="Js\slider\jquery.bxslider.min.js" />
+    <Content Include="images\homepage\ciclo-banner-3.jpg" />
+    <Content Include="css\homepage.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\DFactura.cs" />
@@ -251,8 +257,14 @@
     <None Include="css\fontawesome\webfonts\fa-solid-900.woff2" />
     <None Include="images\3092TREK.jpeg" />
   </ItemGroup>
-  <ItemGroup />
-  <ItemGroup />
+
+
+  <ItemGroup>
+    <Folder Include="images\" />
+    <Folder Include="images\homepage\" />
+    <Folder Include="css\slider\" />
+    <Folder Include="Js\slider\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

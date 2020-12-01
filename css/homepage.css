@@ -1,0 +1,9 @@
+﻿body .container > .content {
+    padding-top: 0;
+}
+
+body .bx-wrapper {
+    box-shadow: none;
+    border-top: 0;
+    border-bottom: 0;
+}

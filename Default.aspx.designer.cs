@@ -16,7 +16,7 @@ namespace PrograWeb {
 		protected System.Web.UI.WebControls.Content Content1;
 		
 		protected System.Web.UI.WebControls.Content Content2;
-		
-		protected System.Web.UI.WebControls.GridView GridView1;
+
+        protected System.Web.UI.WebControls.Repeater NuevosProductos;
 	}
 }

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using MySql.Data.MySqlClient;
+using PrograWeb.Modelos;
 
 namespace PrograWeb.Datos
 {
@@ -12,24 +14,45 @@ namespace PrograWeb.Datos
         string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
 
 
-        public DataTable getArticulos()
+        public List<EArticulo> getNuevosArticulos()
         {
+            return this.getArticulos("SELECT * FROM Articulo ORDER BY idArticulo DESC LIMIT 6");
+        }
+
+        public List<EArticulo> getArticulos(string sql)
+        {
+            List<EArticulo> articulos = new List<EArticulo>();
+
             try
             {
                 using (connection = new MySqlConnection(myConnectionString))
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM Articulo";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))
                     {
-                        MySqlDataAdapter Da = new MySqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        Da.Fill(dt);
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                EArticulo articulo = new EArticulo();
+                                articulo.idArticulo = reader.GetInt32("idArticulo");
+                                articulo.skuArticulo = reader.GetString("skuArticulo");
+                                articulo.nombreArticulo = reader.GetString("nombreArticulo");
+                                articulo.cantidadArticulo = reader.GetDouble("cantidadArticulo");
+                                articulo.descripcionArticulo = reader.GetString("descripcionArticulo");
+                                articulo.codigoMarca = reader.GetInt32("codigoMarca");
+                                articulo.categoriaArticulo = reader.GetString("categoriaArticulo");
+                                articulo.precioArticulo = reader.GetDouble("precioArticulo");
+                                articulo.porcentajeImpuesto = reader.GetDouble("porcentajeImpuesto");
+                                articulo.rutaImagen = reader.GetString("rutaImagen");
+                                articulos.Add(articulo);
+                            }
+                            reader.Close();
+                            connection.Close();
+                        }
 
-                        connection.Close();
-
-                        return dt;
+                        return articulos;
                     }
                 }
             }

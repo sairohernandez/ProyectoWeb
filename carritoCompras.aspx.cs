@@ -42,17 +42,12 @@ namespace PrograWeb
  
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-
-                //ClientScript.RegisterStartupScript(this.GetType(), "alert", "alert('Name: " + name + "\\nCountry: " + country + "');", true);
-
                 DatosFactura = new DFactura();
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
                 DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
 
                 //pedidoCliente.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
-
-
 
 
 
@@ -101,7 +96,19 @@ namespace PrograWeb
 
         protected void btnGuardarCompra_Click(object sender, EventArgs e)
         {
-
+            DatosFactura = new DFactura();
+            DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
+            DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
+            if (DatosFactura.GuardarFactura())
+            {
+                string script = "mensajeCorrecto();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
+            else
+            {
+                string script = "mensajeError();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
         }
     }
 

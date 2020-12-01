@@ -140,6 +140,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Default.aspx" />
+    <Content Include="Js\misMensajes.js" />
     <Content Include="Login.aspx" />
     <Content Include="SolcitudCredito.aspx" />
     <Content Include="Web.config" />
@@ -251,9 +252,7 @@
     <None Include="images\3092TREK.jpeg" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Folder Include="images\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

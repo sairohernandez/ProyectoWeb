@@ -1,8 +1,32 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="carritoCompras.aspx.cs" Inherits="PrograWeb.WebForm1" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
+      <script src="Js/sweetalert.min.js"></script>
+
+     <script src="Js/misMensajes.js" type="text/javascript"></script>
+<%--        <script language="javascript" type="text/javascript">
+
+            function mensajeCorrecto() {
+                swal("", "La solicitud ha sido enviada correctamente", "success");
+            }
+
+            function mensajeExisteRegistro() {
+                swal("", "La identicación ya existe registrada en la base de datos", "warning");
+            }
+
+            function mensajeError() {
+                swal("", "Se ha presentado un error enviando la solicitud, favor intentar mas tarde", "warning");
+            }
+
+
+        </script>--%>
+</asp:Content>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contentPlaceHolder" runat="server">
+
+
+
 
     <asp:GridView ID="GridView1" Class="table table-bordered small-top-margin" runat="server" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" BorderStyle="None" GridLines="None">
         <Columns>
@@ -60,9 +84,9 @@
 
         <div class="col-4">
 
-                <asp:Label Class="btn btn-warning" ID="Label2" runat="server" Text="Total del Pedido" Width="100%"></asp:Label>
-                <asp:Label Class="btn btn-warning" ID="LtotalFactura" runat="server" Text="¢5000" Width="100%"></asp:Label>
-       
+            <asp:Label Class="btn btn-warning" ID="Label2" runat="server" Text="Total del Pedido" Width="100%"></asp:Label>
+            <asp:Label Class="btn btn-warning" ID="LtotalFactura" runat="server" Text="¢5000" Width="100%"></asp:Label>
+
 
         </div>
 
@@ -72,7 +96,7 @@
 
         <div class="col-4">
 
-            <asp:Button Class="btn btn-primary" ID="btnGuardarCompra" runat="server" Text="Proceder con compra"  Width="100%" OnClick="btnGuardarCompra_Click"/>
+            <asp:Button Class="btn btn-primary" ID="btnGuardarCompra" runat="server" Text="Proceder con compra" Width="100%" OnClick="btnGuardarCompra_Click" />
 
         </div>
 

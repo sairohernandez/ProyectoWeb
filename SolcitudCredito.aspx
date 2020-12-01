@@ -2,34 +2,12 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/misestilos.css" />
-    <script src="js/sweetalert.min.js"></script>
+ 
     <script src="http://digitalbush.com/wp-content/uploads/2013/01/jquery.maskedinput-1.3.1.min_.js"></script>
+      <script src="js/sweetalert.min.js"></script>
+     <script src="Js/misMensajes.js" type="text/javascript"></script>
 
-    <script language="javascript" type="text/javascript">
-
-        function mensajeCorrecto() {
-            swal("", "La solicitud ha sido enviada correctamente", "success");
-        }
-
-        function mensajeExisteRegistro() {
-            swal("", "La identicación ya existe registrada en la base de datos", "warning");
-        }
-
-        function mensajeError() {
-            swal("", "Se ha presentado un error enviando la solicitud, favor intentar mas tarde", "warning");
-        }
-
-        //$(function () {
-        //    // Define your mask (using 9 to denote any digit)
-        //    $(#txtTelefono).mask('999-9999');
-        //});
-
-  
-    </script>
 </asp:Content>
-
-
-
 
 <asp:Content ID="Content2" ContentPlaceHolderID="contentPlaceHolder" runat="server">
     <div class="content">

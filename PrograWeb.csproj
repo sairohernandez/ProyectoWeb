@@ -194,6 +194,10 @@
     <Content Include="Js\slider\jquery.bxslider.min.js" />
     <Content Include="images\homepage\ciclo-banner-3.jpg" />
     <Content Include="css\homepage.css" />
+    <Content Include="MTB.aspx" />
+    <Content Include="RUTA.aspx" />
+    <Content Include="css\categoria.css" />
+    <Content Include="images\1092040517.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\DFactura.cs" />
@@ -240,6 +244,19 @@
     <Compile Include="carritoCompras.aspx.designer.cs">
       <DependentUpon>carritoCompras.aspx</DependentUpon>
     </Compile>
+    <Compile Include="MTB.aspx.cs">
+      <DependentUpon>MTB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MTB.aspx.designer.cs">
+      <DependentUpon>MTB.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RUTA.aspx.cs">
+      <DependentUpon>RUTA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="RUTA.aspx.designer.cs">
+      <DependentUpon>RUTA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Datos\DMarca.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

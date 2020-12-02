@@ -28,10 +28,10 @@
                                     <a class="nav-link" runat="server" href="~/Default.aspx">INICIO</a>
                                 </li>
                                 <li class="nav-item active px-4">
-                                    <a class="nav-link" href="#">MTB</a>
+                                    <a class="nav-link" runat="server" href="~/MTB.aspx">MTB</a>
                                 </li>
                                 <li class="nav-item active px-4">
-                                    <a class="nav-link" href="#">RUTA</a>
+                                    <a class="nav-link" runat="server" href="~/RUTA.aspx">RUTA</a>
                                 </li>
                                 <li class="nav-item active px-4">
                                     <a class="nav-link" href="#">NOSOTROS</a>
@@ -42,7 +42,7 @@
                                 <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Inicio de Sesión</asp:LinkButton> 
                                 <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
                                 &nbsp;
-                                <a class="btn btn-outline-success" href="#" role="button">
+                                <a class="btn btn-outline-success" role="button" runat="server" href="~/carritoCompras.aspx">
                                     <i class="fas fa-shopping-cart"></i>
                                 </a>
                             </span>

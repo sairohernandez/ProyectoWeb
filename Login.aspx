@@ -8,10 +8,12 @@
     <div class="content">
 
         <div class="form-group row">
-            <div class="col-8 mx-auto">
+            <div class="col-5 mx-auto">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body py-5">
 
+                        <h5 class="text-center mb-4">INGRESAR</h5>
+                        
                         <div class="form-group row">
                             <div class="col-12">
                                 <asp:Label ID="Label_Username" runat="server" Text="Usuario"/>
@@ -26,11 +28,11 @@
                             </div>
                         </div>
 
-                        <asp:Label ID="Label_Error" runat="server" class="alert alert-danger d-block w-100 text-center" Text=""/>
+                        <asp:Label ID="Label_Error" runat="server" class="alert alert-danger d-block w-100 mt-4 text-center" Text=""/>
 
                     </div>
                     <div class="card-footer text-center">
-                        <asp:Button id="Submit" class="btn btn-lg btn-success" Onclick="Submit_Click" runat="server" Text="Entrar"/>
+                        <asp:Button id="Submit" class="w-75 btn btn-lg btn-success" Onclick="Submit_Click" runat="server" Text="Entrar"/>
                     </div>
                 </div>
             </div>

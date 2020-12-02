@@ -19,6 +19,18 @@ namespace PrograWeb.Datos
             return this.getArticulos("SELECT * FROM Articulo ORDER BY idArticulo DESC LIMIT 6");
         }
 
+        public List<EArticulo> getArticulosPorCategoria(string categoria, string codigoMarca = "")
+        {
+            string whereMarca = "";
+
+            if (codigoMarca != "")
+            {
+                whereMarca = " AND codigoMarca = " + codigoMarca;
+            }
+
+            return this.getArticulos("SELECT * FROM Articulo WHERE categoriaArticulo = '" + categoria + "'" + whereMarca + " ORDER BY nombreArticulo ASC");
+        }
+
         public List<EArticulo> getArticulos(string sql)
         {
             List<EArticulo> articulos = new List<EArticulo>();

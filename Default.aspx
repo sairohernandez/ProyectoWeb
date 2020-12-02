@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PrograWeb.Default" %>
+﻿<%@ Page Title="Inicio" Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PrograWeb.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <link rel="stylesheet" href="css/homepage.css" />
@@ -64,7 +64,10 @@
                 mode: 'fade',
                 captions: true,
                 pager: false,
-                auto: true
+                touchEnabled: false,
+                auto: true,
+                autoHover: true,
+                speed: 700
             });
         });
     </script>

@@ -74,5 +74,47 @@ namespace PrograWeb.Datos
             }
         }
 
+        public EArticulo getArticuloById(string id)
+        {
+            EArticulo articulo = new EArticulo();
+            string sql = "SELECT * FROM Articulo WHERE idArticulo = " + id;
+
+            try
+            {
+                using (connection = new MySqlConnection(myConnectionString))
+                {
+                    connection.Open();
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        using (MySqlDataReader reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                articulo.idArticulo = reader.GetInt32("idArticulo");
+                                articulo.skuArticulo = reader.GetString("skuArticulo");
+                                articulo.nombreArticulo = reader.GetString("nombreArticulo");
+                                articulo.cantidadArticulo = reader.GetDouble("cantidadArticulo");
+                                articulo.descripcionArticulo = reader.GetString("descripcionArticulo");
+                                articulo.codigoMarca = reader.GetInt32("codigoMarca");
+                                articulo.categoriaArticulo = reader.GetString("categoriaArticulo");
+                                articulo.precioArticulo = reader.GetDouble("precioArticulo");
+                                articulo.porcentajeImpuesto = reader.GetDouble("porcentajeImpuesto");
+                                articulo.rutaImagen = reader.GetString("rutaImagen");
+                            }
+                            reader.Close();
+                            connection.Close();
+                        }
+
+                        return articulo;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

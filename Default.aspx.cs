@@ -35,5 +35,10 @@ namespace PrograWeb
 
         }
 
+        protected void Redirect_To_Product(object sender, CommandEventArgs e)
+        {
+            Response.Redirect("Articulo.aspx?id=" + e.CommandArgument.ToString());
+        }
+
     }
 }

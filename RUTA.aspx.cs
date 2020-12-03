@@ -63,5 +63,10 @@ namespace PrograWeb
             EmptyGridLabel.Visible = (ProductosGrid.Items.Count == 0);
         }
 
+        protected void Redirect_To_Product(object sender, CommandEventArgs e)
+        {
+            Response.Redirect("Articulo.aspx?id=" + e.CommandArgument.ToString());
+        }
+
     }
 }

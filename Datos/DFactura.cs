@@ -69,9 +69,25 @@ namespace PrograWeb.Datos
                 EFactura.totalFactura += linea.subtotal;
             }
 
+            calculoCuotaFijaMensual();
+
         }
 
+        private void calculoCuotaFijaMensual()
+            {
+            double tasaPrestamo = 3;
+            if (EFactura.plazoPaFactura > 0)
+            {
+                EFactura.montoCuotaFija = (EFactura.totalFactura * ((tasaPrestamo / 100) * 
+                    Math.Pow((1 + (tasaPrestamo / 100)) , EFactura.plazoPaFactura))
+                    / (Math.Pow((1 + (tasaPrestamo / 100)),EFactura.plazoPaFactura) - 1));
 
+            }
+            else
+            {
+                EFactura.montoCuotaFija = 0;
+            }
+        }
 
         public bool GuardarFactura() 
         {

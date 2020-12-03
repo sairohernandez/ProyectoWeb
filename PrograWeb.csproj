@@ -142,7 +142,8 @@
     <Content Include="Default.aspx" />
     <Content Include="Js\misMensajes.js" />
     <Content Include="Login.aspx" />
-    <Content Include="SolcitudCredito.aspx" />
+    <Content Include="procesoVenta.aspx" />
+    <Content Include="SolicitudCredito.aspx" />
     <Content Include="Web.config" />
     <Content Include="css\bootstrap.min.css" />
     <Content Include="css\theme.css" />
@@ -220,13 +221,20 @@
     <Compile Include="Modelos\EFacturaEncabezado.cs" />
     <Compile Include="Modelos\EMarca.cs" />
     <Compile Include="Modelos\EPersona.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SolcitudCredito.aspx.cs">
-      <DependentUpon>SolcitudCredito.aspx</DependentUpon>
+    <Compile Include="procesoVenta.aspx.cs">
+      <DependentUpon>procesoVenta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="SolcitudCredito.aspx.designer.cs">
-      <DependentUpon>SolcitudCredito.aspx</DependentUpon>
+    <Compile Include="procesoVenta.aspx.designer.cs">
+      <DependentUpon>procesoVenta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolicitudCredito.aspx.cs">
+      <DependentUpon>SolicitudCredito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SolicitudCredito.aspx.designer.cs">
+      <DependentUpon>SolicitudCredito.aspx</DependentUpon>
     </Compile>
     <Compile Include="Template.master.cs">
       <DependentUpon>Template.master</DependentUpon>
@@ -246,12 +254,14 @@
     </Compile>
     <Compile Include="MTB.aspx.cs">
       <DependentUpon>MTB.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="MTB.aspx.designer.cs">
       <DependentUpon>MTB.aspx</DependentUpon>
     </Compile>
     <Compile Include="RUTA.aspx.cs">
       <DependentUpon>RUTA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="RUTA.aspx.designer.cs">
       <DependentUpon>RUTA.aspx</DependentUpon>
@@ -274,14 +284,7 @@
     <None Include="css\fontawesome\webfonts\fa-solid-900.woff2" />
     <None Include="images\3092TREK.jpeg" />
   </ItemGroup>
-
-
-  <ItemGroup>
-    <Folder Include="images\" />
-    <Folder Include="images\homepage\" />
-    <Folder Include="css\slider\" />
-    <Folder Include="Js\slider\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

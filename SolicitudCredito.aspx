@@ -1,9 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="SolcitudCredito.aspx.cs" Inherits="PrograWeb.SolcitudCredito" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="SolicitudCredito.aspx.cs" Inherits="PrograWeb.SolcitudCredito" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <link rel="stylesheet" href="css/misestilos.css" />
- 
-    <script src="http://digitalbush.com/wp-content/uploads/2013/01/jquery.maskedinput-1.3.1.min_.js"></script>
       <script src="js/sweetalert.min.js"></script>
      <script src="Js/misMensajes.js" type="text/javascript"></script>
 
@@ -68,7 +65,7 @@
             <div class="card-footer text-center">
 
                 <asp:Button class="btn btn-success" ID="btnEnviar" runat="server" Text="Enviar Solicitud" OnClick="btnEnviar_Click" />
-                <a class="btn btn-danger md-10" runat="server" href="~/Default.aspx">Cancelar</a>
+                <a class="btn btn-danger md-50" runat="server" href="~/Default.aspx">Cancelar</a>
             </div>
         </div>
 

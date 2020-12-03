@@ -37,36 +37,16 @@ namespace PrograWeb
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Aumentar")
-            {
- 
-                int rowIndex = Convert.ToInt32(e.CommandArgument);
 
-                DatosFactura = new DFactura();
-                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
-
-                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
-
-                //pedidoCliente.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
-
-
-
-                //GridView1.EditIndex = -1;
-
-
-                llenarGrid();
-
-            }
-            else if (e.CommandName == "Disminuir")
+           if (e.CommandName == "editar")
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
                 DatosFactura = new DFactura();
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
+  
+                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle = Convert.ToDouble(GridView1.Rows[rowIndex].Cells[1].Text);
 
-                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
-
-                //pedidoCliente.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
 
                 llenarGrid();
             }
@@ -94,21 +74,33 @@ namespace PrograWeb
             LtotalFactura.Text = "¢"+DatosFactura.EFactura.totalFactura.ToString("N2");
         }
 
-        protected void btnGuardarCompra_Click(object sender, EventArgs e)
+   
+        protected void OnTextChanged(object sender, EventArgs e)
         {
+
+            var txtName = (TextBox)sender;
+            var row = (GridViewRow)txtName.NamingContainer;
+            //Reference the TextBox.
+            //TextBox textBox = sender as TextBox;
+
             DatosFactura = new DFactura();
             DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
-            DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
-            if (DatosFactura.GuardarFactura())
-            {
-                string script = "mensajeCorrecto();";
-                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-            }
-            else
-            {
-                string script = "mensajeError();";
-                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-            }
+
+            DatosFactura.EFactura.LEFacturadetalle[row.RowIndex].cantidadDetalle = Convert.ToDouble(txtName.Text);
+
+
+            llenarGrid();
+
+            ////Get the ID of the TextBox.
+            //string id = textBox.ID;
+
+            ////Display the Text of TextBox.
+            //ClientScript.RegisterClientScriptBlock(this.GetType(), "alert", "alert('" + textBox.Text + "');", true);
+        }
+
+        protected void btnGuardarCompra_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("procesoVenta.aspx");
         }
     }
 

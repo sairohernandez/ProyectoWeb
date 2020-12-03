@@ -198,6 +198,8 @@
     <Content Include="RUTA.aspx" />
     <Content Include="css\categoria.css" />
     <Content Include="images\1092040517.png" />
+    <Content Include="Articulo.aspx" />
+    <Content Include="css\articulo.css" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datos\DFactura.cs" />
@@ -257,6 +259,12 @@
       <DependentUpon>RUTA.aspx</DependentUpon>
     </Compile>
     <Compile Include="Datos\DMarca.cs" />
+    <Compile Include="Articulo.aspx.cs">
+      <DependentUpon>Articulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Articulo.aspx.designer.cs">
+      <DependentUpon>Articulo.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

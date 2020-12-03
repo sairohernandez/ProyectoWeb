@@ -29,14 +29,14 @@
                     <ItemTemplate>
                         <div class="row no-gutters pb-4 mb-4 border-bottom">
                             <div class="col-4">
-                                <a runat="server" href="~/Articulo.aspx">
+                                <asp:LinkButton runat="server" OnCommand="Redirect_To_Product" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idArticulo") %>'>
                                     <asp:Image CssClass="d-block w-100 mx-auto" runat="server" ImageUrl='<%# DataBinder.Eval(Container.DataItem, "rutaImagen") %>' />
-                                </a>
+                                </asp:LinkButton>
                             </div>
                             <div class="col-8 pl-4">
-                                <a runat="server" href="~/Articulo.aspx">
+                                <asp:LinkButton runat="server" OnCommand="Redirect_To_Product" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "idArticulo") %>'>
                                     <div class="h5 text-dark"><%# DataBinder.Eval(Container.DataItem, "nombreArticulo") %></div>
-                                </a>
+                                </asp:LinkButton>
                                 <div><span class="h5 text-danger">₡<%# ((double)DataBinder.Eval(Container.DataItem, "precioArticulo")).ToString("#,000.00") %></span>&nbsp;<span class="text-muted"><small>IVAI</small></span></div>
                                 <div class="mt-4 text-muted"><small><%# DataBinder.Eval(Container.DataItem, "descripcionArticulo") %></small></div>
                             </div>

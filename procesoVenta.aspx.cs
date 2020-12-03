@@ -16,6 +16,7 @@ namespace PrograWeb
         {
             if (!Page.IsPostBack)
             {
+                txtDireccionExacta.Visible = false;
                 calculaDatosFactura();
                 lblFechaFormalizacion.Text = DateTime.Today.ToString("dd/MM/yyyy");
                 lblTotalDocumento.Text = DatosFactura.EFactura.totalFactura.ToString("C0");
@@ -52,6 +53,21 @@ namespace PrograWeb
             DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
             lblMontoCuota.Text = DatosFactura.EFactura.montoCuotaFija.ToString("C2");
             lblTFechaVencimiento.Text = DateTime.Today.AddDays((double)DatosFactura.EFactura.plazoPaFactura).ToString("dd/MM/yyyy");
+        }
+
+        protected void cmdEntrega_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cmdEntrega.SelectedIndex == 1)
+            {
+                txtDireccionExacta.Visible = true;
+                txtDireccionExacta.Style.Add("required", "true");
+            }
+            else
+            {
+                txtDireccionExacta.Visible = false;
+                txtDireccionExacta.Style.Add("required", "false");
+            }
+
         }
     }
 }

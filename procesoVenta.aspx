@@ -17,25 +17,40 @@
                 <div class="card-body text-dark">
                     <h5 class="card-title">Datos de Formalización</h5>
 
-                    <asp:Label runat="server">Plazo Pago</asp:Label>
 
+                    <div class="row">
+                        <div class="col-4">
+                            <asp:Label runat="server">Plazo Pago</asp:Label>
+                        </div>
+                        <div class="col-3">
+                            <asp:DropDownList runat="server" ID="cmbPlazos" OnSelectedIndexChanged="cmbPlazos_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:ListItem Text="6 Meses" Value="180"></asp:ListItem>
+                                <asp:ListItem Text="8 Meses" Value="240"></asp:ListItem>
+                                <asp:ListItem Text="12 Meses" Value="360"></asp:ListItem>
+                                <asp:ListItem Text="24 Meses" Value="720"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
 
-                    <asp:DropDownList runat="server" ID="cmbPlazos" OnSelectedIndexChanged="cmbPlazos_SelectedIndexChanged" AutoPostBack="True">
-                        <asp:ListItem Text="6 Meses" Value="180"></asp:ListItem>
-                        <asp:ListItem Text="8 Meses" Value="240"></asp:ListItem>
-                        <asp:ListItem Text="12 Meses" Value="360"></asp:ListItem>
-                        <asp:ListItem Text="24 Meses" Value="720"></asp:ListItem>
-                    </asp:DropDownList>
-                    <asp:Label runat="server">Forma de entrega</asp:Label>
+                    <div class="row">
+                        <div class="col-4">
+
+                            <asp:Label runat="server">Forma de entrega</asp:Label>
+                        </div>
+                        <div class="col-3">
+                            <asp:DropDownList runat="server" ID="cmdEntrega" OnSelectedIndexChanged="cmdEntrega_SelectedIndexChanged" AutoPostBack="True">
+                                <asp:ListItem Text="En tienda" Value="1"></asp:ListItem>
+                                <asp:ListItem Text="Entrega a domicilio" Value="2"></asp:ListItem>
+                            </asp:DropDownList>
+                        </div>
+                    </div>
+
 
                     <%--&nbsp;--%>
 
 
 
-                    <asp:DropDownList runat="server" ID="cmdEntrega">
-                        <asp:ListItem Text="En tienda" Value="1"></asp:ListItem>
-                        <asp:ListItem Text="Entrega a domicilio" Value="2"></asp:ListItem>
-                    </asp:DropDownList>
+
                     <asp:TextBox type="text" class="form-control" ID="txtDireccionExacta" runat="server" Wrap="true" placeholder="Dirección de envío" TextMode="MultiLine" Rows="5"></asp:TextBox>
                 </div>
             </div>

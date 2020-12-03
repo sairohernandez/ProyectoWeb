@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Data;
 using PrograWeb.Datos;
 using PrograWeb.Modelos;
 
@@ -13,7 +12,7 @@ namespace PrograWeb
 {
     public partial class WebForm1 : System.Web.UI.Page
     {
-        DFactura DatosFactura ;
+        DFactura DatosFactura;
 
 
         protected void Page_Load(object sender, EventArgs e)
@@ -24,27 +23,28 @@ namespace PrograWeb
 
                 DatosFactura = new DFactura();
 
-                DatosFactura.EFactura.LEFacturadetalle = DatosFactura.ObtenerCarrito();
+                //DatosFactura.EFactura.LEFacturadetalle = DatosFactura.ObtenerCarrito();
 
-                Session["GridView"] = DatosFactura.EFactura.LEFacturadetalle;
+                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
+                //Session["GridView"] = DatosFactura.EFactura.LEFacturadetalle;
 
 
                 llenarGrid();
-            
+
             }
-          
+
         }
 
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
-           if (e.CommandName == "editar")
+            if (e.CommandName == "editar")
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
                 DatosFactura = new DFactura();
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
-  
+
                 DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle = Convert.ToDouble(GridView1.Rows[rowIndex].Cells[1].Text);
 
 
@@ -66,15 +66,22 @@ namespace PrograWeb
         private void llenarGrid()
         {
 
-          
-            DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
-            GridView1.DataSource = DatosFactura.EFactura.LEFacturadetalle;
-            GridView1.DataBind();
+            if (DatosFactura.EFactura.LEFacturadetalle != null)
+            {
+                DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
+                GridView1.DataSource = DatosFactura.EFactura.LEFacturadetalle;
+                GridView1.DataBind();
+                LtotalFactura.Text = DatosFactura.EFactura.totalFactura.ToString("C2");
+            }
 
-            LtotalFactura.Text = "¢"+DatosFactura.EFactura.totalFactura.ToString("N2");
+            else
+            {
+                LtotalFactura.Text = (0).ToString("C2");
+            }
+
         }
 
-   
+
         protected void OnTextChanged(object sender, EventArgs e)
         {
 

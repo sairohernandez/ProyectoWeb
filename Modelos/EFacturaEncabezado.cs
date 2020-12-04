@@ -21,6 +21,7 @@ namespace PrograWeb.Modelos
         public double montoCuotaFija { get; set; }
         public double saldoFactura { get; set; }
         public DateTime fechaUltimaCuota { get; set; }
+        public  string direccionEnvio { get; set; }
         public List<EFacturaDetalle> LEFacturadetalle { get; set; }
     }
 }

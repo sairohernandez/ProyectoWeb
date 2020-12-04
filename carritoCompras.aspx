@@ -20,42 +20,16 @@
         .qty {
             border-style: none;
             width: 100%;
-            height:100%;
+            height: 100%;
         }
 
 
         .btn {
-        border-radius:0px;
+            border-radius: 0px;
         }
-
     </style>
 
-    
-    <script language="javascript" type="text/javascript">
-            
-        $("#cantidadPedido").focusout(function () {
-            alert("he salido");
-        }
-        );
-        $(".qty").focusout(function () {
-            alert("he salido2");
-        }
-        );
-
-        $(".table").click(function () {
-            alert("hola");
-        }
-        );
-
-        $(".btn").click(function () {
-            alert("hola");
-        }
-        );
-        
-   
-    </script>
-
-    <asp:GridView ID="GridView1" Class="table table" runat="server" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" BorderStyle="None" GridLines="None" >
+    <asp:GridView ID="GridView1" Class="table table" runat="server" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" BorderStyle="None" GridLines="None">
         <Columns>
 
             <asp:BoundField DataField="nombreArticulo" HeaderText="Descripción" ItemStyle-Width="450px" />
@@ -67,15 +41,28 @@
             </asp:BoundField>
 
 
-            <%--     <asp:BoundField DataField="cantidadDetalle" HeaderText="Cantidad" ItemStyle-Width="50px">
-                <ItemStyle CssClass="product" />
-            </asp:BoundField>--%>
 
-            <asp:TemplateField HeaderText="Cantidad" ItemStyle-Width="150">
+            <asp:TemplateField ControlStyle-Width="20px" >
                 <ItemTemplate>
-                    <asp:TextBox ID="cantidadPedido" Class="qty" TextMode="Number" runat="server" min="0" max="20" step="1"  text='<%# Eval("cantidadDetalle") %>'/>
+                    <asp:ImageButton Text="+" runat="server"  ImageUrl="~/imagenes/Icon_Plus.png" CommandName="Aumentar" CommandArgument="<%# Container.DataItemIndex %>" />
                 </ItemTemplate>
             </asp:TemplateField>
+
+
+            <asp:BoundField DataField="cantidadDetalle" HeaderText="Cant" ItemStyle-Width="25px">
+                <%--<ItemStyle CssClass="product" />--%>
+            </asp:BoundField>
+
+            <asp:TemplateField ControlStyle-Width="20px">
+                <ItemTemplate>
+                    <asp:ImageButton Text="-" runat="server" ImageUrl="~/imagenes/Icon_Minus.png" CommandName="Disminuir" CommandArgument="<%# Container.DataItemIndex %>" />
+                </ItemTemplate>
+            </asp:TemplateField>
+            <%--            <asp:TemplateField HeaderText="Cantidad" ItemStyle-Width="150">
+                <ItemTemplate>
+                    <asp:TextBox ID="cantidadPedido" Class="qty" runat="server" min="0" max="20" step="1" Text='<%# Eval("cantidadDetalle") %>' />
+                </ItemTemplate>
+            </asp:TemplateField>--%>
 
             <asp:BoundField HeaderText="Subtotal" DataField="subtotal" DataFormatString="{0:C0}">
                 <HeaderStyle HorizontalAlign="Center" VerticalAlign="Middle" Width="140px" />
@@ -83,17 +70,9 @@
             </asp:BoundField>
 
 
-            <%--           <asp:TemplateField>
-                <ItemTemplate>
-                    <asp:ImageButton Text="+" runat="server" ImageUrl="~/imagenes/Icon_Plus.png" CommandName="Aumentar" CommandArgument="<%# Container.DataItemIndex %>" />
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <asp:ImageButton Text="-" runat="server" ImageUrl="~/imagenes/Icon_Minus.png" CommandName="Disminuir" CommandArgument="<%# Container.DataItemIndex %>" />
-                </ItemTemplate>
-            </asp:TemplateField>--%>
-            <asp:TemplateField ControlStyle-Width="20px" HeaderText ="Eliminar">
+
+
+            <asp:TemplateField ControlStyle-Width="20px" HeaderText="Eliminar">
                 <ItemTemplate>
                     <asp:ImageButton Class="img" Text="Borrar" runat="server" ImageUrl="~/imagenes/Icon_Trash.png" CommandName="Borrar" CommandArgument="<%# Container.DataItemIndex %>" />
                 </ItemTemplate>

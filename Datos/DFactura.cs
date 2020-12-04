@@ -76,11 +76,12 @@ namespace PrograWeb.Datos
         private void calculoCuotaFijaMensual()
             {
             double tasaPrestamo = 3;
+            EFactura.tazaCreditoFactura = tasaPrestamo;
             if (EFactura.plazoPaFactura > 0)
             {
-                EFactura.montoCuotaFija = (EFactura.totalFactura * ((tasaPrestamo / 100) * 
-                    Math.Pow((1 + (tasaPrestamo / 100)) , EFactura.plazoPaFactura))
-                    / (Math.Pow((1 + (tasaPrestamo / 100)),EFactura.plazoPaFactura) - 1));
+                EFactura.montoCuotaFija = (EFactura.totalFactura * ((EFactura.tazaCreditoFactura / 100) * 
+                    Math.Pow((1 + (EFactura.tazaCreditoFactura / 100)) , EFactura.plazoPaFactura))
+                    / (Math.Pow((1 + (EFactura.tazaCreditoFactura / 100)),EFactura.plazoPaFactura) - 1));
 
             }
             else
@@ -124,7 +125,7 @@ namespace PrograWeb.Datos
                     sql = "INSERT  Factura_Encabezado " +
                           "VALUES(@codigoFactura,@codigoUsuarioFactura,@numeroFactura,@fechaRegFactura,@totalPrecio," +
                           "@totalImpuesto,@totalGarantiaExtendida,@totalFactura,@plazoPaFactura," +
-                          "@tazaCreditoFactura,@numeroCuotasAplicadas,@montoCuotaFija,@saldoFactura,@fechaUltimaCuota);";
+                          "@tazaCreditoFactura,@numeroCuotasAplicadas,@montoCuotaFija,@saldoFactura,@fechaUltimaCuota,@direccionEnvio);";
                      
 
                     using (cmd = new MySqlCommand(sql, connection))
@@ -133,17 +134,18 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = 0;
                         cmd.Parameters.Add("@codigoUsuarioFactura", MySqlDbType.Int32).Value = 1;
                         cmd.Parameters.Add("@numeroFactura", MySqlDbType.VarChar, 50).Value = EFactura.numeroFactura;
-                        cmd.Parameters.Add("@fechaRegFactura", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
+                        cmd.Parameters.Add("@fechaRegFactura", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss");
                         cmd.Parameters.Add("@totalPrecio", MySqlDbType.Double).Value = EFactura.totalPrecio;
                         cmd.Parameters.Add("@totalImpuesto", MySqlDbType.Double).Value = EFactura.totalImpuesto;
                         cmd.Parameters.Add("@totalGarantiaExtendida", MySqlDbType.Double).Value = 0;
                         cmd.Parameters.Add("@totalFactura", MySqlDbType.Double).Value = EFactura.totalFactura;
-                        cmd.Parameters.Add("@plazoPaFactura", MySqlDbType.Int32).Value = 30; //30 Dias por defecto
-                        cmd.Parameters.Add("@tazaCreditoFactura", MySqlDbType.Int32).Value = 2;
+                        cmd.Parameters.Add("@plazoPaFactura", MySqlDbType.Int32).Value = EFactura.plazoPaFactura; //30 Dias por defecto
+                        cmd.Parameters.Add("@tazaCreditoFactura", MySqlDbType.Int32).Value = EFactura.tazaCreditoFactura;
                         cmd.Parameters.Add("@numeroCuotasAplicadas", MySqlDbType.Int32).Value = 0;
-                        cmd.Parameters.Add("@montoCuotaFija", MySqlDbType.Double).Value = 0;
-                        cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double, 50).Value = 0;
+                        cmd.Parameters.Add("@montoCuotaFija", MySqlDbType.Double).Value = EFactura.montoCuotaFija;
+                        cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double, 50).Value = EFactura.totalFactura;
                         cmd.Parameters.Add("@fechaUltimaCuota", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
+                        cmd.Parameters.Add("@direccionEnvio", MySqlDbType.VarChar, 500).Value = EFactura.direccionEnvio; 
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
 

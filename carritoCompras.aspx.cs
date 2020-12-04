@@ -38,14 +38,28 @@ namespace PrograWeb
         protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
         {
 
-            if (e.CommandName == "editar")
+            if (e.CommandName == "Aumentar")
             {
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
 
                 DatosFactura = new DFactura();
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
-                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle = Convert.ToDouble(GridView1.Rows[rowIndex].Cells[1].Text);
+                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle += 1;
+
+
+                llenarGrid();
+            }
+
+            else if (e.CommandName == "Disminuir")
+
+            {
+                int rowIndex = Convert.ToInt32(e.CommandArgument);
+
+                DatosFactura = new DFactura();
+                DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
+
+                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
 
 
                 llenarGrid();

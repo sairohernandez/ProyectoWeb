@@ -25,7 +25,16 @@ namespace PrograWeb
 
         protected void btnEnviar_Click(object sender, EventArgs e)
         {
-   
+            calculaDatosFactura();
+
+            if (cmdEntrega.SelectedIndex == 1)
+            {
+                DatosFactura.EFactura.direccionEnvio = txtDireccionExacta.Text;
+            }
+            else
+                {
+                    DatosFactura.EFactura.direccionEnvio = "";
+                }
 
             if (DatosFactura.GuardarFactura())
             {
@@ -37,13 +46,15 @@ namespace PrograWeb
                 string script = "mensajeError();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
             }
+            Session["GridView"] = null;
+            Response.Redirect("Default.aspx");
         }
 
         protected void cmbPlazos_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
             calculaDatosFactura();
-       
+
         }
 
         void calculaDatosFactura()

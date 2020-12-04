@@ -14,14 +14,18 @@
         <div class="card-group">
 
             <div class="card">
+                <div class="card-header">
+                    Datos de Formalización
+                </div>
                 <div class="card-body text-dark">
-                    <h5 class="card-title">Datos de Formalización</h5>
-
 
                     <div class="row">
                         <div class="col-4">
-                            <asp:Label runat="server">Plazo Pago</asp:Label>
+                            <p>
+                                <asp:Label runat="server">Plazo Pago</asp:Label>
+                            </p>
                         </div>
+                            
                         <div class="col-3">
                             <asp:DropDownList runat="server" ID="cmbPlazos" OnSelectedIndexChanged="cmbPlazos_SelectedIndexChanged" AutoPostBack="True">
                                 <asp:ListItem Text="6 Meses" Value="180"></asp:ListItem>
@@ -34,8 +38,9 @@
 
                     <div class="row">
                         <div class="col-4">
-
+                                <p>
                             <asp:Label runat="server">Forma de entrega</asp:Label>
+                                    </p>
                         </div>
                         <div class="col-3">
                             <asp:DropDownList runat="server" ID="cmdEntrega" OnSelectedIndexChanged="cmdEntrega_SelectedIndexChanged" AutoPostBack="True">
@@ -57,42 +62,53 @@
 
 
             <div class="card">
+                <div class="card-header">
+                    Resumen de Crédito
+                </div>
                 <div class="card-body text-dark">
-                    <h5 class="card-title">Resumen de Pago</h5>
+
                     <div class="row">
                         <div class="col-6">
                             <asp:Label runat="server">Total Documento</asp:Label>
                         </div>
                         <div class="col-6">
-                            <asp:Label ID="lblTotalDocumento" runat="server"></asp:Label>
+                            <p>
+                                <asp:Label ID="lblTotalDocumento" runat="server" Font-Bold="true"></asp:Label>
+                            </p>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <asp:Label runat="server">Cuota Mensual</asp:Label>
+                            <p>
+                                <asp:Label runat="server">Cuota Mensual</asp:Label>
+                            </p>
                         </div>
                         <div class="col-6">
-                            <asp:Label ID="lblMontoCuota" runat="server"></asp:Label>
+                            <asp:Label ID="lblMontoCuota" runat="server" Font-Bold="true"></asp:Label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-6">
-                            <asp:Label runat="server">Fecha Formalización</asp:Label>
+                            <p>
+                                <asp:Label runat="server">Fecha Formalización</asp:Label>
+                            </p>
                         </div>
                         <div class="col-6">
-                            <asp:Label ID="lblFechaFormalizacion" runat="server"></asp:Label>
+                            <asp:Label ID="lblFechaFormalizacion" runat="server" Font-Bold="true"></asp:Label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-6">
-
-                            <asp:Label runat="server">Fecha Vencimiento</asp:Label>
+                            <p>
+                                <asp:Label runat="server">Fecha Vencimiento</asp:Label>
+                            </p>
                         </div>
                         <div class="col-6">
-                            <asp:Label ID="lblTFechaVencimiento" runat="server"></asp:Label>
+                            <asp:Label ID="lblTFechaVencimiento" runat="server" Font-Bold="true"></asp:Label>
                         </div>
                     </div>
+
                 </div>
 
             </div>

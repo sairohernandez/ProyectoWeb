@@ -23,6 +23,10 @@ namespace PrograWeb {
 		
 		protected System.Web.UI.WebControls.LinkButton Link_Logout;
 		
+		protected System.Web.UI.WebControls.LinkButton Link_Cart;
+		
+		protected System.Web.UI.WebControls.Label Label_Cart_Counter;
+		
 		protected System.Web.UI.HtmlControls.HtmlGenericControl mainContainer;
 		
 		protected System.Web.UI.WebControls.ContentPlaceHolder contentPlaceHolder;

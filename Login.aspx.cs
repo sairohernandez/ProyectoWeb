@@ -38,6 +38,7 @@ namespace PrograWeb
 
             foreach (DataRow dr in dt.Rows)
             {
+                Session["codigoUsuario"] = dr["codigoUsuario"].ToString();
                 Session["nombreUsuario"] = dr["nombreUsuario"].ToString();
                 Response.Redirect("Default.aspx");
             }

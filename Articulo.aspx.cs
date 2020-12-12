@@ -16,7 +16,6 @@ namespace PrograWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if ((!Page.IsPostBack) || (string.IsNullOrEmpty(Request.QueryString["id"])))
-              
             {
                 try
                 {
@@ -63,20 +62,6 @@ namespace PrograWeb
                 precioDetalle = Convert.ToDouble(ProductPrice.Text.Replace("₡", ""))
             });
             Session["GridView"] = car;
-
-            //     //Session["GridView"]
-
-            //Console.WriteLine("addtocart 1");
-            //int id = this.articulo.idArticulo;
-            //int qty = Int32.Parse(ProductQty.Text);
-            //Console.WriteLine("addtocart 2");
-
-            //if (!string.IsNullOrEmpty(ProductQty.Text))
-            //{
-            //    Console.WriteLine("addtocart 3");
-            //    //Response.Redirect(this.articulo.idArticulo.ToString() + "-" + ProductQty.Text + ".aspx");
-            //}
-            //Console.WriteLine("addtocart 4");
         }
 
 

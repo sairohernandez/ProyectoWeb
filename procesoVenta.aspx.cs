@@ -59,6 +59,7 @@ namespace PrograWeb
 
         void calculaDatosFactura()
         {
+            DatosFactura.EFactura.codigoUsuarioFactura = Convert.ToInt32(Session["codigoUsuario"]);
             DatosFactura.EFactura.plazoPaFactura = Convert.ToInt32(cmbPlazos.SelectedValue);
             DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
             DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);

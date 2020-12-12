@@ -64,8 +64,13 @@ namespace PrograWeb.Datos
 
             foreach (EFacturaDetalle linea in EFactura.LEFacturadetalle)
             {
+
+                linea.porcentajeImpuesto = 13;
+                    
                 linea.subtotal = linea.cantidadDetalle * linea.precioDetalle;
 
+                linea.impuestoDetalle = linea.subtotal - (linea.subtotal / (1 + (linea.porcentajeImpuesto / 100)));
+ 
                 EFactura.totalFactura += linea.subtotal;
             }
 
@@ -132,7 +137,7 @@ namespace PrograWeb.Datos
            
                     {
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = 0;
-                        cmd.Parameters.Add("@codigoUsuarioFactura", MySqlDbType.Int32).Value = 1;
+                        cmd.Parameters.Add("@codigoUsuarioFactura", MySqlDbType.Int32).Value = EFactura.codigoUsuarioFactura;
                         cmd.Parameters.Add("@numeroFactura", MySqlDbType.VarChar, 50).Value = EFactura.numeroFactura;
                         cmd.Parameters.Add("@fechaRegFactura", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss");
                         cmd.Parameters.Add("@totalPrecio", MySqlDbType.Double).Value = EFactura.totalPrecio;
@@ -177,7 +182,7 @@ namespace PrograWeb.Datos
                             cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = (int)ds.Rows[0][0];
                             cmd.Parameters.Add("@codigoArticulo", MySqlDbType.Int32).Value = linea.codigoArticulo;
                             cmd.Parameters.Add("@cantidadDetalle", MySqlDbType.Double).Value = linea.cantidadDetalle;
-                            cmd.Parameters.Add("@precioDetalle", MySqlDbType.Double).Value = linea.precioDetalle;
+                            cmd.Parameters.Add("@precioDetalle", MySqlDbType.Double).Value = linea.subtotal- linea.impuestoDetalle; //Al total se le debe restar el total impuesto
                             cmd.Parameters.Add("@impuestoDetalle", MySqlDbType.Double).Value = linea.impuestoDetalle;
                             cmd.Parameters.Add("@plazoGarantiaDetalle", MySqlDbType.Int32).Value = 0;
                             cmd.Parameters.Add("@montoGarantiaDetalle", MySqlDbType.Int32).Value = 0;

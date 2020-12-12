@@ -20,6 +20,7 @@ namespace PrograWeb
                 Link_Login.Visible = false;
                 Link_Logout.Visible = true;
                 Link_Cart.Visible = true;
+                this.Refresh_Cart_Counter();
             } else
             {
                 Label_Username.Visible = false;
@@ -40,6 +41,11 @@ namespace PrograWeb
             Session["nombreUsuario"] = "";
             Session.Abandon();
             Response.Redirect("Default.aspx");
+        }
+
+        private void Refresh_Cart_Counter() 
+        {
+            Label_Cart_Counter.Text = "66";
         }
 
     }

@@ -40,6 +40,7 @@ namespace PrograWeb
             {
                 Session["codigoUsuario"] = dr["codigoUsuario"].ToString();
                 Session["nombreUsuario"] = dr["nombreUsuario"].ToString();
+                Session["tipoUsuario"] = dr["tipoUsuario"].ToString();
                 Response.Redirect("Default.aspx");
             }
 

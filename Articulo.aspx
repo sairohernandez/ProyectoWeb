@@ -8,6 +8,11 @@
     <div class="content">
 
         <div class="row">
+            <div id="Messages" runat="server" class="col-12 mb-5">
+                <div id="MessageContainer" runat="server" role="alert">
+                    <asp:Label runat="server" id="MessageContent"></asp:Label>
+                </div>
+            </div>
             <div class="col-12 col-md-6 mb-4">
                 <asp:Image CssClass="w-100" runat="server" id="ProductImage" />
             </div>

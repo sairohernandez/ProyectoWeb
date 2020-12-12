@@ -17,6 +17,12 @@ namespace PrograWeb {
 		
 		protected System.Web.UI.WebControls.Content Content2;
 		
+		protected System.Web.UI.HtmlControls.HtmlGenericControl Messages;
+		
+		protected System.Web.UI.HtmlControls.HtmlGenericControl MessageContainer;
+		
+		protected System.Web.UI.WebControls.Label MessageContent;
+		
 		protected System.Web.UI.WebControls.Image ProductImage;
 		
 		protected System.Web.UI.WebControls.Label ProductName;

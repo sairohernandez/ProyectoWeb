@@ -17,6 +17,8 @@ namespace PrograWeb {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
 		
+		protected System.Web.UI.HtmlControls.HtmlGenericControl Link_Admin;
+		
 		protected System.Web.UI.WebControls.Label Label_Username;
 		
 		protected System.Web.UI.WebControls.LinkButton Link_Login;

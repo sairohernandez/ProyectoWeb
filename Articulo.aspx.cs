@@ -17,6 +17,17 @@ namespace PrograWeb
         {
             if ((!Page.IsPostBack) || (string.IsNullOrEmpty(Request.QueryString["id"])))
             {
+                // Pintamos mensajes
+                Messages.Visible = false;
+                if (Convert.ToString(Session["messageContent"]) != "")
+                {
+                    MessageContainer.Attributes["class"] = "alert " + Convert.ToString(Session["messageType"]);
+                    MessageContent.Text = Convert.ToString(Session["messageContent"]);
+                    Messages.Visible = true;
+                    Session["messageContent"] = "";
+                    Session["messageType"] = "";
+                }
+
                 try
                 {
                     string id = Request.QueryString["id"];
@@ -37,32 +48,52 @@ namespace PrograWeb
                         AddToCartBtn.Enabled = false;
                         AddToCartBtn.CssClass = "d-inline-block w-50 btn btn-secondary align-top";
                     }
-              
-                
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
+                    Response.Redirect("Default.aspx");
                 }
             }
-         
         }
 
         protected void Add_To_Cart(object sender, EventArgs e)
         {
-            List<EFacturaDetalle>  car = (List<EFacturaDetalle>)Session["GridView"];
+            try
+            {
+                if (Convert.ToString(Session["codigoUsuario"]) != "")
+                {
+                    List<EFacturaDetalle> car = (List<EFacturaDetalle>)Session["GridView"];
 
-            if (car == null) {
-                car = new List<EFacturaDetalle>();
+                    if (car == null)
+                    {
+                        car = new List<EFacturaDetalle>();
+                    }
+                    car.Add(new EFacturaDetalle
+                    {
+                        codigoArticulo = Convert.ToInt32(Request.QueryString["id"]),
+                        cantidadDetalle = Convert.ToInt32(ProductQty.Text),
+                        nombreArticulo = ProductName.Text,
+                        precioDetalle = Convert.ToDouble(ProductPrice.Text.Replace("₡", "")),
+                        rutaImagen = ProductImage.ImageUrl
+                    });
+
+                    Session["GridView"] = car;
+                    Session["messageContent"] = ProductName.Text + " ha sido agregada a tu carrito.";
+                    Session["messageType"] = "alert-success";
+                    Response.Redirect(Request.RawUrl);
+                } 
+                else 
+                {
+                    Session["messageContent"] = "Debes solicitar tu crédito y esperar su aprobación para poder comprar en nuestro sitio.";
+                    Session["messageType"] = "alert-warning";
+                    Response.Redirect("SolicitudCredito.aspx");
+                }
             }
-            car.Add(new EFacturaDetalle {  
-                codigoArticulo = Convert.ToInt32(Request.QueryString["id"]),          
-                cantidadDetalle = Convert.ToInt32(ProductQty.Text),
-                nombreArticulo = ProductName.Text,
-                precioDetalle = Convert.ToDouble(ProductPrice.Text.Replace("₡", "")),
-                rutaImagen= ProductImage.ImageUrl
-            });
-            Session["GridView"] = car;
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
 

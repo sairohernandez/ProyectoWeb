@@ -9,6 +9,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentPlaceHolder" runat="server">
     <div class="content">
 
+        <div id="Messages" runat="server" class="w-100 mb-5">
+            <div id="MessageContainer" runat="server" role="alert">
+                <asp:Label runat="server" id="MessageContent"></asp:Label>
+            </div>
+        </div>
+        
         <div class="card">
             <div class="card-header h3">
                 Solicitud de crédito

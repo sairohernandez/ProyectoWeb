@@ -11,6 +11,11 @@
 
         <div class="slider">
             <div>
+                <a runat="server" href="~/SolicitudCredito.aspx">
+                    <asp:Image runat="server" ImageUrl="~/images/homepage/ciclo-banner-3.jpg" ToolTip="Solicite su credito con nosotros" />
+                </a>
+            </div>
+            <div>
                 <a runat="server" href="~/MTB.aspx">
                     <asp:Image runat="server" ImageUrl="~/images/homepage/ciclo-banner-1.jpg" ToolTip="Nuestras MTB para tu siguiente aventura" />
                 </a>
@@ -18,11 +23,6 @@
             <div>
                 <a runat="server" href="~/RUTA.aspx">
                     <asp:Image runat="server" ImageUrl="~/images/homepage/ciclo-banner-2.jpg" ToolTip="Nuestras bicicletas de RUTA siempre en carretera" />
-                </a>
-            </div>
-            <div>
-                <a runat="server" href="~/SolcitudCredito.aspx">
-                    <asp:Image runat="server" ImageUrl="~/images/homepage/ciclo-banner-3.jpg" ToolTip="Solicite su credito con nosotros" />
                 </a>
             </div>
         </div>

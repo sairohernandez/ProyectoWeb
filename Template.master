@@ -33,13 +33,22 @@
                                 <li class="nav-item active px-4">
                                     <a class="nav-link" runat="server" href="~/RUTA.aspx">RUTA</a>
                                 </li>
-                                <li class="nav-item active px-4">
-                                    <a class="nav-link" href="#">NOSOTROS</a>
+                                <li id="Link_Admin" runat="server" class="nav-item active px-4 dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        ADMINISTRACION
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" runat="server" href="~/solicitudesCredito.aspx">Solicitudes de Crédito</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" runat="server" href="~/reportes.aspx">Reportes</a>
+                                    </div>
                                 </li>
                             </ul>
                             <span class="navbar-text">
                                 <asp:Label ID="Label_Username" runat="server" class="nav-link d-inline-block" Text=""/>
-                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Inicio de Sesión</asp:LinkButton> 
+                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Iniciar Sesión</asp:LinkButton> 
                                 <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
                                 &nbsp;
                                 <asp:LinkButton ID="Link_Cart" runat="server" role="button" class="btn btn-outline-success btn-cart-link" OnClick="carritocompras_click">

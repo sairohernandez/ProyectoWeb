@@ -13,8 +13,15 @@ namespace PrograWeb
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Convert.ToString(Session["nombreUsuario"]) == "") {
-                
+            // Pintamos mensajes
+            Messages.Visible = false;
+            if (Convert.ToString(Session["messageContent"]) != "")
+            {
+                MessageContainer.Attributes["class"] = "alert " + Convert.ToString(Session["messageType"]);
+                MessageContent.Text = Convert.ToString(Session["messageContent"]);
+                Messages.Visible = true;
+                Session["messageContent"] = "";
+                Session["messageType"] = "";
             }
         }
 

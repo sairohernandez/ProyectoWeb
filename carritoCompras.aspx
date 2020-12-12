@@ -32,6 +32,13 @@
     <asp:GridView ID="GridView1" Class="table table" runat="server" AutoGenerateColumns="false" OnRowCommand="GridView1_RowCommand" BorderStyle="None" GridLines="None">
         <Columns>
 
+            <asp:TemplateField HeaderText="Imagen">
+                <ItemTemplate>
+                    <asp:Image ID="Imagen" runat="server" ImageUrl='<%# DataBinder.Eval(Container.DataItem, "rutaImagen") %>'
+                        Width="100px"  />
+                </ItemTemplate>
+            </asp:TemplateField>
+
             <asp:BoundField DataField="nombreArticulo" HeaderText="Descripción" ItemStyle-Width="450px" />
 
 
@@ -42,9 +49,9 @@
 
 
 
-            <asp:TemplateField ControlStyle-Width="20px" >
+            <asp:TemplateField ControlStyle-Width="20px">
                 <ItemTemplate>
-                    <asp:ImageButton Text="+" runat="server"  ImageUrl="~/imagenes/Icon_Plus.png" CommandName="Aumentar" CommandArgument="<%# Container.DataItemIndex %>" />
+                    <asp:ImageButton Text="+" runat="server" ImageUrl="~/imagenes/Icon_Plus.png" CommandName="Aumentar" CommandArgument="<%# Container.DataItemIndex %>" />
                 </ItemTemplate>
             </asp:TemplateField>
 

@@ -1,28 +1,21 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="reportes.aspx.cs" Inherits="PrograWeb.reportes" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Template.master" AutoEventWireup="true" CodeBehind="reportes.aspx.cs" Inherits="PrograWeb.reportes" %>
 
 <%@ Register Assembly="Microsoft.ReportViewer.WebForms"   Namespace="Microsoft.Reporting.WebForms" TagPrefix="rsweb" %>
 
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
-    <title></title>
-</head>
-<body>
+</asp:Content>
 
 
-      <form id="form1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="contentPlaceHolder" runat="server">
+    <div class="content">
+
+
        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
     <div>
-        <rsweb:ReportViewer ID="ReportViewer1" runat="server"  Height="1000px" Width="1200px"   BorderColor="Gray" BorderWidth="0px" ></rsweb:ReportViewer>
-<%--          <rsweb:ReportViewer ID="rptEtiqueta" runat="server" Height="100%" 
-                           Width="1200px" AsyncRendering="False" SizeToReportContent="false" 
-                           BackColor="White" BorderColor="Gray" BorderWidth="0px" >
-               </rsweb:ReportViewer>--%>
+        <rsweb:ReportViewer ID="ReportViewer1" runat="server" Hight="1000px"  Width="100%"   BorderColor="Gray" BorderWidth="0px" ></rsweb:ReportViewer>
+
     </div>
-    </form>
-  
-</body>
-</html>
+</asp:Content>

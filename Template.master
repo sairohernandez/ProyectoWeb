@@ -42,7 +42,7 @@
                                 <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Inicio de Sesión</asp:LinkButton> 
                                 <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
                                 &nbsp;
-                                <asp:LinkButton ID="Link_Cart" runat="server" role="button" class="btn btn-outline-success btn-cart-link" href="~/carritoCompras.aspx">
+                                <asp:LinkButton ID="Link_Cart" runat="server" role="button" class="btn btn-outline-success btn-cart-link" OnClick="carritocompras_click">
                                     <i class="fas fa-shopping-cart"></i>
                                     <asp:Label id="Label_Cart_Counter" runat="server" Text="0" CssClass="cart-counter-label" />
                                 </asp:LinkButton>

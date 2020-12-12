@@ -47,6 +47,9 @@ namespace PrograWeb
         {
             Label_Cart_Counter.Text = "66";
         }
-
+        protected void carritocompras_click(object sender, EventArgs e)
+        {
+            Response.Redirect("carritoCompras.aspx");
+        }
     }
 }

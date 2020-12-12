@@ -59,7 +59,8 @@ namespace PrograWeb
                 codigoArticulo = Convert.ToInt32(Request.QueryString["id"]),          
                 cantidadDetalle = Convert.ToInt32(ProductQty.Text),
                 nombreArticulo = ProductName.Text,
-                precioDetalle = Convert.ToDouble(ProductPrice.Text.Replace("₡", ""))
+                precioDetalle = Convert.ToDouble(ProductPrice.Text.Replace("₡", "")),
+                rutaImagen= ProductImage.ImageUrl
             });
             Session["GridView"] = car;
         }

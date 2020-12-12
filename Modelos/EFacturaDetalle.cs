@@ -20,5 +20,6 @@ namespace PrograWeb.Modelos
         public int plazoGarantiaDetalle { get; set; }
         public double montoGarantiaDetalle { get; set; }
         public double subtotal { get; set; } //Para totalizar el detalle
+        public string  rutaImagen { get; set; }
     }
 }

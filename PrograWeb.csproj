@@ -142,6 +142,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="activarnuevoscreditos.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Js\misMensajes.js" />
     <Content Include="Login.aspx" />
@@ -207,6 +208,13 @@
     <Content Include="css\articulo.css" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="activarnuevoscreditos.aspx.cs">
+      <DependentUpon>activarnuevoscreditos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="activarnuevoscreditos.aspx.designer.cs">
+      <DependentUpon>activarnuevoscreditos.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Datos\DFactura.cs" />
     <Compile Include="Datos\DPersona.cs" />
     <Compile Include="Default.aspx.cs">

@@ -43,6 +43,8 @@
                                         <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
                                         <div class="dropdown-divider"></div>
                                         <a class="dropdown-item" runat="server" href="~/reportes.aspx">Reportes</a>
+                                         <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Solicitudes</a>
                                     </div>
                                 </li>
                             </ul>

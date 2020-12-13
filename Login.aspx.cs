@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using MySql.Data.MySqlClient;
 using System.Data;
-using MySqlX.XDevAPI;
+using System.Configuration;
 
 namespace PrograWeb
 {
@@ -22,13 +22,17 @@ namespace PrograWeb
 
         {
             Label_Error.Visible = false;
-            MySqlConnection conn = new MySqlConnection("server=remotemysql.com;port=3306;database=JU7v5Dpmc3;user id=JU7v5Dpmc3; password=80JwZf6LER");
+
+   
+            string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
+
+            MySqlConnection conn = new MySqlConnection(myConnectionString);
 
             conn.Open();
 
             MySqlCommand cmd = conn.CreateCommand();
             cmd.CommandType = CommandType.Text;
-            cmd.CommandText = "select * from Usuarios where nombreUsuario = '" + TextBox_Username.Text + "' and claveUsuario = '" + TextBox_Password.Text + "'";
+            cmd.CommandText = "select codigoUsuario,nombreUsuario,tipoUsuario from Usuarios where identificacionUsuario = '" + TextBox_Username.Text + "' and claveUsuario = '" + TextBox_Password.Text + "' and estadoUsuario = 1";
             cmd.ExecuteNonQuery();
 
             DataTable dt = new DataTable();
@@ -49,25 +53,7 @@ namespace PrograWeb
             Label_Error.Text = "Usuario o Password incorrectos";
             Label_Error.Visible = true;
 
-            //String User = TextBox_Username.Text;
-            //String Password = TextBox_Password.Text;
-
-            //MySqlConnection conn = new MySqlConnection("server=remotemysql.com;port=3306;database=JU7v5Dpmc3;user id=JU7v5Dpmc3; password=80JwZf6LER") ;
-
-            //MySqlDataAdapter sda = new MySqlDataAdapter("select count (*) Usuarios where nombreUsuario = '" + TextBox_Username.Text + "' and claveUsuario = '"+ TextBox_Password.Text +"'", conn);
-
-            //DataTable dt = new DataTable();
-
-            //sda.Fill(dt);
-
-            //if (dt.Rows[0][0].ToString() == "1")
-            //{
-            //    Response.Redirect("Default.aspx");
-            //}
-            //else
-            //{
-            //    Label_Error.Text = "Username/Password Incorrect";
-            //}
+ 
         }
 
     }

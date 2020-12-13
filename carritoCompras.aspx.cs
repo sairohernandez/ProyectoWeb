@@ -23,12 +23,8 @@ namespace PrograWeb
 
                 DatosFactura = new DFactura();
 
-                //DatosFactura.EFactura.LEFacturadetalle = DatosFactura.ObtenerCarrito();
-
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
-                //Session["GridView"] = DatosFactura.EFactura.LEFacturadetalle;
-
-
+         
                 llenarGrid();
 
             }

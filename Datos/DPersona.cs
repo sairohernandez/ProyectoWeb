@@ -16,6 +16,71 @@ namespace PrograWeb.Datos
         MySqlConnection connection;
         string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
 
+        //Obtiene solicitude pendientes de aprobacion
+        public DataTable ObtieneSolicitudesNuevas()
+        {
+
+            using (connection = new MySqlConnection(myConnectionString))
+            {
+                connection.Open();
+
+                string sql;
+
+                sql = "select codigoUsuario,identificacionUsuario,nombreUsuario,apellidosUsuario,correoUsuario,telefonoUsuario from Usuarios where estadousuario = 3";
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                {
+
+                    DataTable dt = new DataTable();
+                    MySqlDataAdapter Da = new MySqlDataAdapter();
+                    Da.SelectCommand = cmd;
+                    Da.Fill(dt);
+
+                    return dt;
+
+
+                }
+            }
+        }
+
+
+
+        public bool procesarEvalucionCredito(int codigoRespuesta, int codigoUsuario)
+        {
+
+            try
+            {
+
+                using (connection = new MySqlConnection(myConnectionString))
+                {
+                    connection.Open();
+
+                    string sql;
+
+                    sql = "update Usuarios set estadousuario = @estadousuario where codigoUsuario = @codigoUsuario";
+
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, connection))
+                    {
+                        cmd.Parameters.Add("@estadoUsuario", MySqlDbType.Int32).Value = codigoRespuesta;
+                        cmd.Parameters.Add("@codigoUsuario", MySqlDbType.Int32).Value = codigoUsuario;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.ExecuteNonQuery();
+
+                    }
+                    connection.Close();
+                }
+        
+                return true;
+
+            }
+            catch (Exception e)
+            {
+
+                return false;
+            }
+        }
+
 
         public int GuardarSolicitudCredito(EPersona solicitud)
         {
@@ -71,7 +136,7 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@tipoUsuario", MySqlDbType.VarChar, 1).Value = 2;
                         cmd.Parameters.Add("@fechaRegUsuario", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
                         cmd.Parameters.Add("@limiteCreditoUsuario", MySqlDbType.Double, 50).Value = 0;
-                        cmd.Parameters.Add("@estadoUsuario", MySqlDbType.Int32, 50).Value = 3;
+                        cmd.Parameters.Add("@estadoUsuario", MySqlDbType.Int32).Value = 3;
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
 

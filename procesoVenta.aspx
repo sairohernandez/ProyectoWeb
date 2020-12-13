@@ -3,7 +3,7 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
-    <script src="js/sweetalert.min.js"></script>
+    <script src="Js/sweetalert.min.js"></script>
     <script src="Js/misMensajes.js" type="text/javascript"></script>
 
 </asp:Content>

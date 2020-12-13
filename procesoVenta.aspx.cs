@@ -32,22 +32,22 @@ namespace PrograWeb
                 DatosFactura.EFactura.direccionEnvio = txtDireccionExacta.Text;
             }
             else
-                {
-                    DatosFactura.EFactura.direccionEnvio = "";
-                }
+            {
+                DatosFactura.EFactura.direccionEnvio = "";
+            }
 
             if (DatosFactura.GuardarFactura())
             {
-                string script = "mensajeCorrecto();";
+                string script = "msEnvioFactura();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+                Session["GridView"] = null;
             }
             else
             {
                 string script = "mensajeError();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
             }
-            Session["GridView"] = null;
-            Response.Redirect("Default.aspx");
+
         }
 
         protected void cmbPlazos_SelectedIndexChanged(object sender, EventArgs e)

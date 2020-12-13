@@ -70,7 +70,9 @@ namespace PrograWeb.Datos
                 linea.subtotal = linea.cantidadDetalle * linea.precioDetalle;
 
                 linea.impuestoDetalle = linea.subtotal - (linea.subtotal / (1 + (linea.porcentajeImpuesto / 100)));
- 
+
+                EFactura.totalImpuesto += linea.impuestoDetalle;
+
                 EFactura.totalFactura += linea.subtotal;
             }
 

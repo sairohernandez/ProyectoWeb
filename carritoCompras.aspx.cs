@@ -59,8 +59,15 @@ namespace PrograWeb
                 DatosFactura = new DFactura();
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
 
-                DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
+                if (DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle == 1)
+                {
+                    DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle = 1;
 
+                }
+                else
+                {
+                    DatosFactura.EFactura.LEFacturadetalle[rowIndex].cantidadDetalle -= 1;
+                }
 
                 llenarGrid();
             }

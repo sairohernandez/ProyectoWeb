@@ -28,10 +28,10 @@
                             
                         <div class="col-3">
                             <asp:DropDownList runat="server" ID="cmbPlazos" OnSelectedIndexChanged="cmbPlazos_SelectedIndexChanged" AutoPostBack="True">
-                                <asp:ListItem Text="6 Meses" Value="180"></asp:ListItem>
-                                <asp:ListItem Text="8 Meses" Value="240"></asp:ListItem>
-                                <asp:ListItem Text="12 Meses" Value="360"></asp:ListItem>
-                                <asp:ListItem Text="24 Meses" Value="720"></asp:ListItem>
+                                <asp:ListItem Text="6 Meses" Value="6"></asp:ListItem>
+                                <asp:ListItem Text="8 Meses" Value="8"></asp:ListItem>
+                                <asp:ListItem Text="12 Meses" Value="12"></asp:ListItem>
+                                <asp:ListItem Text="24 Meses" Value="24"></asp:ListItem>
                             </asp:DropDownList>
                         </div>
                     </div>
@@ -120,7 +120,7 @@
 
     <div class="card-footer text-center">
 
-        <asp:Button class="btn btn-success" ID="btnEnviar" runat="server" Text="Enviar Solicitud" OnClick="btnEnviar_Click" />
+        <asp:Button class="btn btn-success" ID="btnEnviar" runat="server" Text="Ejecutar Compra" OnClick="btnEnviar_Click" />
         <a class="btn btn-danger md-10" runat="server" href="~/Default.aspx">Cancelar</a>
     </div>
 

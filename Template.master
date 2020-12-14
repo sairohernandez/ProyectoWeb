@@ -1,77 +1,79 @@
 ﻿<%@ Master Language="C#" Inherits="PrograWeb.Template" %>
+
 <!DOCTYPE html>
 <html>
-    <head runat="server">
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Inicio</title>
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/fontawesome/css/all.css" />
-        <link rel="stylesheet" href="css/theme.css" />
-        <script type="text/javascript" src="Js/jquery-3.5.1.min.js"></script>
-        <script type="text/javascript" src="Js/bootstrap.min.js"></script>
-        <asp:ContentPlaceHolder ID="head" runat="server" />
-    </head>
-    <body>
-        <form id="form1" runat="server">
-            <header class="bg-dark">
-                <div class="container">
-                    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                        <a class="navbar-brand" runat="server" href="~/Default.aspx">TICO CICLOS</a>
-                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                            <span class="navbar-toggler-icon"></span>
-                        </button>
+<head runat="server">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/fontawesome/css/all.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+    <script type="text/javascript" src="Js/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript" src="Js/bootstrap.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+        <header class="bg-dark">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                    <a class="navbar-brand" runat="server" href="~/Default.aspx">TICO CICLOS</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
 
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul class="navbar-nav mr-auto">
-                                <li class="nav-item active px-4">
-                                    <a class="nav-link" runat="server" href="~/Default.aspx">INICIO</a>
-                                </li>
-                                <li class="nav-item active px-4">
-                                    <a class="nav-link" runat="server" href="~/MTB.aspx">MTB</a>
-                                </li>
-                                <li class="nav-item active px-4">
-                                    <a class="nav-link" runat="server" href="~/RUTA.aspx">RUTA</a>
-                                </li>
-                                <li id="Link_Admin" runat="server" class="nav-item active px-4 dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        ADMINISTRACION
-                                    </a>
-                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" runat="server" href="~/solicitudesCredito.aspx">Solicitudes de Crédito</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
-                                        <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" runat="server" href="~/reportes.aspx">Reportes</a>
-                                         <div class="dropdown-divider"></div>
-                                        <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Solicitudes</a>
-                                    </div>
-                                </li>
-                            </ul>
-                            <span class="navbar-text">
-                                <asp:Label ID="Label_Username" runat="server" class="nav-link d-inline-block" Text=""/>
-                                <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Iniciar Sesión</asp:LinkButton> 
-                                <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton> 
-                                &nbsp;
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active px-4">
+                                <a class="nav-link" runat="server" href="~/Default.aspx">INICIO</a>
+                            </li>
+                            <li class="nav-item active px-4">
+                                <a class="nav-link" runat="server" href="~/MTB.aspx">MTB</a>
+                            </li>
+                            <li class="nav-item active px-4">
+                                <a class="nav-link" runat="server" href="~/RUTA.aspx">RUTA</a>
+                            </li>
+                            <li id="Link_Admin" runat="server" class="nav-item active px-4 dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMINISTRACION
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" runat="server" href="~/solicitudesCredito.aspx">Solicitudes de Crédito</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Solicitudes</a>
+                                    <div class="dropdown-divider"></div>
+                                    <h1 class="dropdown-header">Reportes</h1>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" runat="server" href="~/reportes.aspx">Ventas</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <span class="navbar-text">
+                            <asp:Label ID="Label_Username" runat="server" class="nav-link d-inline-block" Text="" />
+                            <asp:LinkButton ID="Link_Login" runat="server" class="nav-link d-inline-block" OnClick="IBLogin_Click">Iniciar Sesión</asp:LinkButton>
+                            <asp:LinkButton ID="Link_Logout" runat="server" class="nav-link d-inline-block" OnClick="IBLogout_Click">Cerrar Sesión</asp:LinkButton>
+                            &nbsp;
                                 <asp:LinkButton ID="Link_Cart" runat="server" role="button" class="btn btn-outline-success btn-cart-link" OnClick="carritocompras_click">
                                     <i class="fas fa-shopping-cart"></i>
-                                    <asp:Label id="Label_Cart_Counter" runat="server" Text="0" CssClass="cart-counter-label" />
+                                    <asp:Label ID="Label_Cart_Counter" runat="server" Text="0" CssClass="cart-counter-label" />
                                 </asp:LinkButton>
-                            </span>
-                        </div>
-                    </nav>
-                </div>
-            </header>
+                        </span>
+                    </div>
+                </nav>
+            </div>
+        </header>
 
-            <main role="main" id="mainContainer" class="container" runat="server">
-                <asp:ContentPlaceHolder id="contentPlaceHolder" runat="server" /> 
-            </main>
+        <main role="main" id="mainContainer" class="container" runat="server">
+            <asp:ContentPlaceHolder ID="contentPlaceHolder" runat="server" />
+        </main>
 
-            <footer class="footer bg-light">
-                <div class="container">
-                    <span class="text-muted">TICO CICLOS - 2020</span>
-                </div>
-            </footer>
-        </form>
-    </body>
+        <footer class="footer bg-light">
+            <div class="container">
+                <span class="text-muted">TICO CICLOS - 2020</span>
+            </div>
+        </footer>
+    </form>
+</body>
 </html>

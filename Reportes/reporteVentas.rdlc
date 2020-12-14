@@ -739,7 +739,6 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -755,6 +754,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontSize>8pt</FontSize>
+                                    <Format>C2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1078,7 +1078,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Totales Factura</Value>
+                                  <Value>Total Factura</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1137,14 +1137,14 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="impuestoDetalle1">
+                        <Textbox Name="Textbox2">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Sum(Fields!impuestoDetalle.Value)</Value>
+                                  <Value />
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -1153,7 +1153,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>impuestoDetalle1</rd:DefaultName>
+                          <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>

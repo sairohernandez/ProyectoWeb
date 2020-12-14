@@ -19,15 +19,14 @@ namespace PrograWeb
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack ) {
-                reporteVentas();
+               
             }
             
         }
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void btnProcesar_Click(object sender, EventArgs e)
         {
-        //    Dim dtArticulos As DataTable = CType(Session(SessionArticulos), DataTable)
-        //Dim tipoEtiqueta As Integer = CInt(Session(SessionTipoEtiqueta))
+            reporteVentas();
 
         }
 
@@ -43,7 +42,7 @@ namespace PrograWeb
                     "precioDetalle,impuestoDetalle,nombreArticulo from Factura_Encabezado " +
                     "join Factura_Detalle on Factura_Encabezado.codigoFactura = Factura_Detalle.codigoFactura "+
                     "join Articulo on Factura_Detalle.codigoArticulo = Articulo.idArticulo "+
-                    "where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'; ";
+                    "where DATE(fechaRegFactura)    BETWEEN   @fechaIncial AND @fechaFinal; ";
 
             using (connection = new MySqlConnection(myConnectionString))
             { 
@@ -52,6 +51,9 @@ namespace PrograWeb
                 using (dta = new MySqlDataAdapter())
                 using (ds = new DataTable())
                 {
+
+                    cmd.Parameters.Add("@fechaIncial", MySqlDbType.DateTime).Value = txtFechaInicial.Text;
+                    cmd.Parameters.Add("@fechaFinal", MySqlDbType.DateTime).Value = txtFechaFinal.Text;
                     cmd.CommandType = CommandType.Text;
                     dta.SelectCommand = cmd;
                     dta.Fill(ds);

@@ -64,7 +64,7 @@ namespace PrograWeb
             DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];
             DatosFactura.CalcularTotalFactura(DatosFactura.EFactura.LEFacturadetalle);
             lblMontoCuota.Text = DatosFactura.EFactura.montoCuotaFija.ToString("C2");
-            lblTFechaVencimiento.Text = DateTime.Today.AddDays((double)DatosFactura.EFactura.plazoPaFactura).ToString("dd/MM/yyyy");
+            lblTFechaVencimiento.Text = DateTime.Today.AddMonths((int)DatosFactura.EFactura.plazoPaFactura).ToString("dd/MM/yyyy");
         }
 
         protected void cmdEntrega_SelectedIndexChanged(object sender, EventArgs e)

@@ -95,6 +95,8 @@ namespace PrograWeb.Datos
             {
                 EFactura.montoCuotaFija = 0;
             }
+            EFactura.fechaRegFactura = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+     
         }
 
         public bool GuardarFactura() 
@@ -141,7 +143,7 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = 0;
                         cmd.Parameters.Add("@codigoUsuarioFactura", MySqlDbType.Int32).Value = EFactura.codigoUsuarioFactura;
                         cmd.Parameters.Add("@numeroFactura", MySqlDbType.VarChar, 50).Value = EFactura.numeroFactura;
-                        cmd.Parameters.Add("@fechaRegFactura", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd hh:mm:ss");
+                        cmd.Parameters.Add("@fechaRegFactura", MySqlDbType.DateTime).Value = EFactura.fechaRegFactura;
                         cmd.Parameters.Add("@totalPrecio", MySqlDbType.Double).Value = EFactura.totalPrecio;
                         cmd.Parameters.Add("@totalImpuesto", MySqlDbType.Double).Value = EFactura.totalImpuesto;
                         cmd.Parameters.Add("@totalGarantiaExtendida", MySqlDbType.Double).Value = 0;

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PrograWeb.Datos;
 using PrograWeb.Modelos;
+using System.Web.Security;
 
 namespace PrograWeb
 {
@@ -14,13 +15,28 @@ namespace PrograWeb
         DFactura DatosFactura = new DFactura();
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Convert.ToString(Session["codigoUsuario"]) == "")
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                HttpContext.Current.Response.Redirect("Default.aspx", true);
+            }
+
             if (!Page.IsPostBack)
             {
+                //Seguridad
+                Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+                Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetNoStore();
+
                 txtDireccionExacta.Visible = false;
                 calculaDatosFactura();
                 lblFechaFormalizacion.Text = DateTime.Today.ToString("dd/MM/yyyy");
-                lblTotalDocumento.Text = DatosFactura.EFactura.totalFactura.ToString("C0");
+                lblTotalDocumento.Text = DatosFactura.EFactura.totalFactura.ToString("C2");
             }
+
+
         }
 
         protected void btnEnviar_Click(object sender, EventArgs e)

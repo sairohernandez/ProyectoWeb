@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PrograWeb.Datos;
 using PrograWeb.Modelos;
+using System.Web.Security;
 
 
 namespace PrograWeb
@@ -18,9 +19,20 @@ namespace PrograWeb
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Convert.ToString(Session["codigoUsuario"]) == "")
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                HttpContext.Current.Response.Redirect("Default.aspx", true);
+            }
+
             if (!this.IsPostBack)
             {
-
+                //Seguridad
+                Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+                Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetNoStore();
+          
                 DatosFactura = new DFactura();
 
                 DatosFactura.EFactura.LEFacturadetalle = (List<EFacturaDetalle>)Session["GridView"];

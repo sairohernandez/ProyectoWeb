@@ -4,8 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using PrograWeb.Modelos;
 using PrograWeb.Datos;
+using System.Web.Security;
 
 namespace PrograWeb
 {
@@ -15,8 +15,22 @@ namespace PrograWeb
         DPersona DatosPersona = new DPersona();
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Convert.ToString(Session["codigoUsuario"]) == "")
+            {
+
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                HttpContext.Current.Response.Redirect("Default.aspx", true);
+            }
             if (!Page.IsPostBack)
             {
+
+                //Seguridad
+                Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+                Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetNoStore();
+
+
                 visualizarSolicitudes();
             }
         }

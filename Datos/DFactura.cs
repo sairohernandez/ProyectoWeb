@@ -66,7 +66,7 @@ namespace PrograWeb.Datos
             {
 
                 linea.porcentajeImpuesto = 13;
-                    
+
                 linea.subtotal = linea.cantidadDetalle * linea.precioDetalle;
 
                 linea.impuestoDetalle = linea.subtotal - (linea.subtotal / (1 + (linea.porcentajeImpuesto / 100)));
@@ -81,14 +81,14 @@ namespace PrograWeb.Datos
         }
 
         private void calculoCuotaFijaMensual()
-            {
+        {
             double tasaPrestamo = 3;
-            EFactura.tazaCreditoFactura = tasaPrestamo;
+            EFactura.tasaCreditoFactura = tasaPrestamo;
             if (EFactura.plazoPaFactura > 0)
             {
-                EFactura.montoCuotaFija = (EFactura.totalFactura * ((EFactura.tazaCreditoFactura / 100) * 
-                    Math.Pow((1 + (EFactura.tazaCreditoFactura / 100)) , EFactura.plazoPaFactura))
-                    / (Math.Pow((1 + (EFactura.tazaCreditoFactura / 100)),EFactura.plazoPaFactura) - 1));
+                EFactura.montoCuotaFija = (EFactura.totalFactura * ((EFactura.tasaCreditoFactura / 100) *
+                    Math.Pow((1 + (EFactura.tasaCreditoFactura / 100)), EFactura.plazoPaFactura))
+                    / (Math.Pow((1 + (EFactura.tasaCreditoFactura / 100)), EFactura.plazoPaFactura) - 1));
 
             }
             else
@@ -96,50 +96,57 @@ namespace PrograWeb.Datos
                 EFactura.montoCuotaFija = 0;
             }
             EFactura.fechaRegFactura = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
-     
+
         }
 
-        public bool GuardarFactura() 
+        public bool GuardarFactura()
         {
+            MySqlTransaction transaccion; 
+
             try
             {
                 using (connection = new MySqlConnection(myConnectionString))
                 {
+                                        
                     connection.Open();
-
+               
+                    transaccion = connection.BeginTransaction();
+                    
                     string sql;
                     MySqlCommand cmd;
                     MySqlDataAdapter dta;
                     DataTable ds;
 
 
-
+               
 
                     sql = " update Consecutivos set ultimoconsecutivo = ultimoconsecutivo + 1 where codigoConsecutivo  = 1; \n" +
                         "Select ultimoconsecutivo  from Consecutivos where codigoConsecutivo  = 1;";
-                   
+
                     using (cmd = new MySqlCommand(sql, connection))
                     using (dta = new MySqlDataAdapter())
                     using (ds = new DataTable())
                     {
-                        cmd.CommandType = CommandType.Text; 
+                        cmd.Transaction = transaccion;
+                        cmd.CommandType = CommandType.Text;
                         dta.SelectCommand = cmd;
                         dta.Fill(ds);
 
-                      
-                        EFactura.numeroFactura ="9990000101" + Convert.ToInt32(ds.Rows[0][0]).ToString("0000000000");
+
+                        EFactura.numeroFactura = "9990000101" + Convert.ToInt32(ds.Rows[0][0]).ToString("0000000000");
                     }
 
 
                     sql = "INSERT  Factura_Encabezado " +
                           "VALUES(@codigoFactura,@codigoUsuarioFactura,@numeroFactura,@fechaRegFactura,@totalPrecio," +
                           "@totalImpuesto,@totalGarantiaExtendida,@totalFactura,@plazoPaFactura," +
-                          "@tazaCreditoFactura,@numeroCuotasAplicadas,@montoCuotaFija,@saldoFactura,@fechaUltimaCuota,@direccionEnvio);";
-                     
+                          "@tasaCreditoFactura,@numeroCuotasAplicadas,@montoCuotaFija,@saldoFactura,@fechaUltimaCuota,@direccionEnvio);";
+
 
                     using (cmd = new MySqlCommand(sql, connection))
-           
+
                     {
+                        cmd.Transaction = transaccion;
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = 0;
                         cmd.Parameters.Add("@codigoUsuarioFactura", MySqlDbType.Int32).Value = EFactura.codigoUsuarioFactura;
                         cmd.Parameters.Add("@numeroFactura", MySqlDbType.VarChar, 50).Value = EFactura.numeroFactura;
@@ -149,12 +156,12 @@ namespace PrograWeb.Datos
                         cmd.Parameters.Add("@totalGarantiaExtendida", MySqlDbType.Double).Value = 0;
                         cmd.Parameters.Add("@totalFactura", MySqlDbType.Double).Value = EFactura.totalFactura;
                         cmd.Parameters.Add("@plazoPaFactura", MySqlDbType.Int32).Value = EFactura.plazoPaFactura; //30 Dias por defecto
-                        cmd.Parameters.Add("@tazaCreditoFactura", MySqlDbType.Int32).Value = EFactura.tazaCreditoFactura;
+                        cmd.Parameters.Add("@tasaCreditoFactura", MySqlDbType.Int32).Value = EFactura.tasaCreditoFactura;
                         cmd.Parameters.Add("@numeroCuotasAplicadas", MySqlDbType.Int32).Value = 0;
                         cmd.Parameters.Add("@montoCuotaFija", MySqlDbType.Double).Value = EFactura.montoCuotaFija;
                         cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double, 50).Value = EFactura.totalFactura;
                         cmd.Parameters.Add("@fechaUltimaCuota", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
-                        cmd.Parameters.Add("@direccionEnvio", MySqlDbType.VarChar, 500).Value = EFactura.direccionEnvio; 
+                        cmd.Parameters.Add("@direccionEnvio", MySqlDbType.VarChar, 500).Value = EFactura.direccionEnvio;
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
 
@@ -166,6 +173,7 @@ namespace PrograWeb.Datos
                     using (dta = new MySqlDataAdapter())
                     using (ds = new DataTable())
                     {
+                        cmd.Transaction = transaccion;
                         cmd.CommandType = CommandType.Text;
                         dta.SelectCommand = cmd;
                         dta.Fill(ds);
@@ -181,12 +189,12 @@ namespace PrograWeb.Datos
                     {
                         using (cmd = new MySqlCommand(sql, connection))
                         {
-                           
+                            cmd.Transaction = transaccion;
                             cmd.Parameters.Add("@codigoDetalle", MySqlDbType.Int32).Value = 0;
                             cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = (int)ds.Rows[0][0];
                             cmd.Parameters.Add("@codigoArticulo", MySqlDbType.Int32).Value = linea.codigoArticulo;
                             cmd.Parameters.Add("@cantidadDetalle", MySqlDbType.Double).Value = linea.cantidadDetalle;
-                            cmd.Parameters.Add("@precioDetalle", MySqlDbType.Double).Value = linea.subtotal- linea.impuestoDetalle; //Al total se le debe restar el total impuesto
+                            cmd.Parameters.Add("@precioDetalle", MySqlDbType.Double).Value = linea.subtotal - linea.impuestoDetalle; //Al total se le debe restar el total impuesto
                             cmd.Parameters.Add("@impuestoDetalle", MySqlDbType.Double).Value = linea.impuestoDetalle;
                             cmd.Parameters.Add("@plazoGarantiaDetalle", MySqlDbType.Int32).Value = 0;
                             cmd.Parameters.Add("@montoGarantiaDetalle", MySqlDbType.Int32).Value = 0;
@@ -196,6 +204,7 @@ namespace PrograWeb.Datos
                         }
                     }
 
+                    transaccion.Commit();
                     connection.Close();
                 }
 
@@ -205,12 +214,20 @@ namespace PrograWeb.Datos
 
             catch (Exception ex)
             {
+
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+                  
+
                 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                 // Append text to an existing file named "WriteLines.txt".
                 using (StreamWriter outputFile = new StreamWriter(Path.Combine(docPath, "LogPrograWeb.txt"), true))
                 {
-                    outputFile.WriteLine("Error. Fecha y Hora: " + DateTime.Today.ToString() + " "   + ex.Message);
+                    outputFile.WriteLine("Error. Fecha y Hora: " + DateTime.Now.ToString() + " " + ex.Message);
                 }
                 return false;
             }

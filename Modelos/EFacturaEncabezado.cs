@@ -16,8 +16,8 @@ namespace PrograWeb.Modelos
         public double totalGarantiaExtendida { get; set; }
         public double totalFactura { get; set; }
         public int plazoPaFactura { get; set; }
-        public double tazaCreditoFactura { get; set; }
-        public double numeroCuotasAplicadas { get; set; }
+        public double tasaCreditoFactura { get; set; }
+        public int numeroCuotasAplicadas { get; set; }
         public double montoCuotaFija { get; set; }
         public double saldoFactura { get; set; }
         public DateTime fechaUltimaCuota { get; set; }

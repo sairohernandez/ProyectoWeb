@@ -7,6 +7,7 @@ using System.Web.UI.WebControls;
 using System.Data;
 using MySql.Data.MySqlClient;
 using System.Configuration;
+using System.Web.Security;
 
 using Microsoft.Reporting.WebForms;
 namespace PrograWeb
@@ -18,8 +19,18 @@ namespace PrograWeb
         string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (Convert.ToString(Session["codigoUsuario"]) == "")
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                HttpContext.Current.Response.Redirect("Default.aspx", true);
+            }
+
             if (!Page.IsPostBack ) {
-               
+                //Seguridad
+                Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+                Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetNoStore();
             }
             
         }

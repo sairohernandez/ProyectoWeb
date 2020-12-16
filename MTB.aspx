@@ -17,7 +17,7 @@
                 <asp:Repeater id="MarcasList" runat="server">
                     <ItemTemplate>
                         <div class="mb-2">
-                            <asp:LinkButton runat="server" class="text-dark" OnCommand="Filter_Products" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "codigoMarca") %>'>
+                            <asp:LinkButton runat="server" class="btn btn-secondary"  Width="170px" OnCommand="Filter_Products" CommandArgument='<%# DataBinder.Eval(Container.DataItem, "codigoMarca") %>'>
                                 <%# DataBinder.Eval(Container.DataItem, "nombreMarca") %>
                             </asp:LinkButton> 
                         </div>

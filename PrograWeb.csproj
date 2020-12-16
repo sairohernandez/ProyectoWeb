@@ -216,6 +216,7 @@
       <DependentUpon>activarnuevoscreditos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Datos\DFactura.cs" />
+    <Compile Include="Datos\DPagos.cs" />
     <Compile Include="Datos\DPersona.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -234,6 +235,7 @@
     <Compile Include="Modelos\EFacturaDetalle.cs" />
     <Compile Include="Modelos\EFacturaEncabezado.cs" />
     <Compile Include="Modelos\EMarca.cs" />
+    <Compile Include="Modelos\EPagos.cs" />
     <Compile Include="Modelos\EPersona.cs" />
     <Compile Include="procesoVenta.aspx.cs">
       <DependentUpon>procesoVenta.aspx</DependentUpon>

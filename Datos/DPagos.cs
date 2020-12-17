@@ -14,14 +14,13 @@ namespace PrograWeb.Datos
 {
 
 
-
     public class DPagos
     {
         EPagos Epagos;
 
         MySqlConnection connection;
         string myConnectionString = ConfigurationManager.ConnectionStrings["MyDB"].ConnectionString;
-        void CalculaPagos(EFacturaEncabezado prestamo)
+        public List<EPagos> CalculaPagos(EFacturaEncabezado prestamo, int numeroPagos)
         {
 
 
@@ -29,8 +28,9 @@ namespace PrograWeb.Datos
             double nuevoSaldo = prestamo.saldoFactura;
 
 
+            List<EPagos> listaPagos = new List<EPagos>();
 
-            for (int contador = prestamo.numeroCuotasAplicadas; contador < prestamo.plazoPaFactura; contador++)
+            for (int contador = prestamo.numeroCuotasAplicadas; contador < numeroPagos; contador++)
             {
                 Epagos = new EPagos();
                 Epagos.numeroDocumentoPago = 0;
@@ -48,8 +48,9 @@ namespace PrograWeb.Datos
 
                 Epagos.nuevoSaldoCredito = nuevoSaldo;
 
-
+                listaPagos.Add(Epagos);
             }
+            return listaPagos;
         }
         bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos)
         {
@@ -85,7 +86,7 @@ namespace PrograWeb.Datos
                         }
 
 
-                        sql = "INSERT  Factura_Encabezado " +
+                        sql = "INSERT Pagos " +
                               "VALUES(@codigoPago,@codigoFactura,@fechaRegPago,@numeroCuotaPago,@numeroDocumentoPago," +
                               "@montoAmortizacionPago,@montoInteresesPago,@montoPago,@fechaCuotaPago," +
                               "@codigoUsuarioPago,@nuevoSaldoCredito);";
@@ -155,7 +156,7 @@ namespace PrograWeb.Datos
         }
 
 
-        List<EFacturaEncabezado> ObtieneCreditosPendientes(int codigoCliente)
+        public List<EFacturaEncabezado> ObtieneCreditosPendientes(int codigoCliente)
         {
 
             string sql;
@@ -166,8 +167,8 @@ namespace PrograWeb.Datos
             List<EFacturaEncabezado> listaFactura;
 
 
-            sql = " select codigoFactura,numeroFactura,fechaUltimaCuota, saldoFactura " +
-                           " where codigoFactura  = @codigoUsuario;";
+            sql = " select codigoFactura,codigoUsuarioFactura,numeroFactura,fechaRegFactura,montoCuotaFija,tasaCreditoFactura,fechaUltimaCuota,plazoPaFactura, saldoFactura " +
+                           " from Factura_Encabezado where codigoUsuarioFactura = @codigoUsuario and saldoFactura > 0;";
 
             using (cmd = new MySqlCommand(sql, connection))
             using (dta = new MySqlDataAdapter())
@@ -181,11 +182,15 @@ namespace PrograWeb.Datos
                 if (ds.Rows.Count > 0)
                 {
                     listaFactura = new List<EFacturaEncabezado>();
-                    for (int contador = 0; contador < ds.Rows.Count - 1; contador++)
+                    for (int contador = 0; contador <= ds.Rows.Count - 1; contador++)
                     {
 
                         factura = new EFacturaEncabezado();
                         factura.codigoFactura = Convert.ToInt32(ds.Rows[contador]["codigoFactura"]);
+                        factura.codigoUsuarioFactura = Convert.ToInt32(ds.Rows[contador]["codigoUsuarioFactura"]);
+                        factura.fechaRegFactura = Convert.ToDateTime(ds.Rows[contador]["fechaRegFactura"]);
+                        factura.montoCuotaFija = Convert.ToDouble(ds.Rows[contador]["montoCuotaFija"]);
+                        factura.tasaCreditoFactura = Convert.ToInt32(ds.Rows[contador]["tasaCreditoFactura"]);
                         factura.numeroFactura = Convert.ToString(ds.Rows[contador]["numeroFactura"]);
                         factura.saldoFactura = Convert.ToDouble(ds.Rows[contador]["saldoFactura"]);
                         factura.fechaUltimaCuota = Convert.ToDateTime(ds.Rows[contador]["fechaUltimaCuota"]);
@@ -201,6 +206,41 @@ namespace PrograWeb.Datos
 
         }
 
+
+        public int buscaUsuarioPorIndentificacion(string identificacion)
+        {
+
+            using (connection = new MySqlConnection(myConnectionString))
+            {
+                string sql;
+                MySqlCommand cmd;
+                MySqlDataAdapter dta;
+                DataTable ds;
+
+                sql = "select codigoUsuario,nombreUsuario from Usuarios where identificacionUsuario = @identificacionUsuario  and estadoUsuario = 1";
+
+                using (cmd = new MySqlCommand(sql, connection))
+                using (dta = new MySqlDataAdapter())
+                using (ds = new DataTable())
+                {
+                    cmd.Parameters.Add("@identificacionUsuario", MySqlDbType.String).Value = identificacion;
+                    cmd.CommandType = CommandType.Text;
+                    dta.SelectCommand = cmd;
+                    dta.Fill(ds);
+                    if (ds.Rows.Count > 0)
+                    {
+                        return Convert.ToInt32(ds.Rows[0]["codigoUsuario"]);
+                    }
+                    else
+                    {
+                        return 0;
+                    }
+
+                }
+            }
+        }
+
+      
 
     }
 }

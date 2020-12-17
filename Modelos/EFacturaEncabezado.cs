@@ -10,7 +10,7 @@ namespace PrograWeb.Modelos
         public int codigoFactura { get; set; }
         public int codigoUsuarioFactura { get; set; }
         public string numeroFactura { get; set; }
-        public string fechaRegFactura { get; set; }
+        public DateTime fechaRegFactura { get; set; }
         public double totalPrecio { get; set; }
         public double totalImpuesto { get; set; }
         public double totalGarantiaExtendida { get; set; }

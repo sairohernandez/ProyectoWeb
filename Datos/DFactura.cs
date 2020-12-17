@@ -95,7 +95,7 @@ namespace PrograWeb.Datos
             {
                 EFactura.montoCuotaFija = 0;
             }
-            EFactura.fechaRegFactura = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+            EFactura.fechaRegFactura = DateTime.Now;
 
         }
 

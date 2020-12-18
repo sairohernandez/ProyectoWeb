@@ -35,18 +35,27 @@
                                 <a class="nav-link" runat="server" href="~/RUTA.aspx">RUTA</a>
                             </li>
                             <li id="Link_Admin" runat="server" class="nav-item active px-4 dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMINISTRACION
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    ADMINISTRACION
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" runat="server" href="~/SolicitudCredito.aspx">Solicitudes de Crédito</a>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Crédito</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" runat="server" href="~/SolicitudCredito.aspx">Nuevo Crédito</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Autorizar Crédito</a></li>
+                                            <div class="dropdown-divider"></div>
+                                            <li><a class="dropdown-item" runat="server" href="~/procesoPagos.aspx">Pagar Mensualidad</a></li>
+                                        </ul>
+                                    </div>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Autorización de Solicitudes</a>
-                                    <div class="dropdown-divider"></div>
-                                    <h1 class="dropdown-header">Reportes</h1>
-                                    <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" runat="server" href="~/reportes.aspx">Ventas</a>
+                                    <div class="dropdown-submenu">
+                                        <a href="#" class="dropdown-item dropdown-toggle" data-toggle="dropdown">Reportes</a>
+                                        <ul class="dropdown-menu">
+                                            <li><a class="dropdown-item" runat="server" href="~/reportes.aspx">Ventas</a></li>
+                                        </ul>
+                                    </div>
                                 </div>
                             </li>
                         </ul>

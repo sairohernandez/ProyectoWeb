@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using PrograWeb.Datos;
 using PrograWeb.Modelos;
+using System.Web.Security;
 
 namespace PrograWeb
 {
@@ -17,7 +18,20 @@ namespace PrograWeb
         List<EPagos> listaPagos = new List<EPagos>();
         protected void Page_Load(object sender, EventArgs e)
         {
-            int a;
+            if (Convert.ToString(Session["codigoUsuario"]) == "")
+            {
+                Session.Abandon();
+                FormsAuthentication.SignOut();
+                HttpContext.Current.Response.Redirect("Default.aspx", true);
+            }
+
+            if (!Page.IsPostBack)
+            {
+                //Seguridad
+                Response.Cache.SetCacheability(HttpCacheability.ServerAndNoCache);
+                Response.Cache.SetAllowResponseInBrowserHistory(false);
+                Response.Cache.SetNoStore();
+            }
         }
 
         public void CargarPrestamos()
@@ -127,11 +141,11 @@ namespace PrograWeb
             dpagos = new DPagos();
             listaCreditos = (List<EFacturaEncabezado>)Session["prestamos"];
             listaPagos = (List<EPagos>)Session["pagos"];
-            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos,Convert.ToInt32(txtNumeroCuotas.Text), Convert.ToInt32(Session["codigoUsuario"])))
+            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos, Convert.ToInt32(txtNumeroCuotas.Text), Convert.ToInt32(Session["codigoUsuario"])))
             {
                 string script = "mensajePagoOk();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-              
+
                 LimpiarInterfaz();
                 txtIdentificacion.Text = "";
             }
@@ -144,7 +158,7 @@ namespace PrograWeb
 
         void LimpiarInterfaz()
         {
-           
+
             lblTotalAmortizacion.Text = "";
             lblTotalIntereses.Text = "";
             lblTotalPago.Text = "";

@@ -99,12 +99,36 @@ namespace PrograWeb
                         lblFechaUltimaCuota.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaUltimaCuota.ToString("dd/MM/yyyy");
                         lblFechaVencimiento.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaRegFactura.AddMonths(listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura).ToString("dd/MM/yyyy");
 
-
+                        Session["pagos"] = listaPagos;
                     }
                 }
             }
 
 
+        }
+
+        protected void btnGuardar_Click(object sender, EventArgs e)
+        {
+            dpagos = new DPagos();
+            listaCreditos = (List<EFacturaEncabezado>)Session["prestamos"];
+            listaPagos = (List<EPagos>)Session["pagos"];
+            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos))
+            {
+                string script = "mensajePagoOk();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+                Session["prestamos"] = null;
+                Session["pagos"] = null;
+            }
+            else
+            {
+                string script = "mensajeError();";
+                ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+            }
+        }
+
+        void LimpiarInterfaz()
+        {
+            cmbPrestamos.DataSource = null;
         }
     }
 }

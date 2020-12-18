@@ -23,4 +23,9 @@ function mensajeError() {
 }
 
 
+function mensajePagoOk() {
+	swal("", "El pago ha sido aplicado correctamente", "success");
+}
+
+
 

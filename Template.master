@@ -38,11 +38,11 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMINISTRACION
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" runat="server" href="~/solicitudesCredito.aspx">Solicitudes de Crédito</a>
+                                    <a class="dropdown-item" runat="server" href="~/SolicitudCredito.aspx">Solicitudes de Crédito</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" runat="server" href="~/abonosCredito.aspx">Pagar Mensualidad</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Solicitudes</a>
+                                    <a class="dropdown-item" runat="server" href="~/activarnuevoscreditos.aspx">Autorización de Solicitudes</a>
                                     <div class="dropdown-divider"></div>
                                     <h1 class="dropdown-header">Reportes</h1>
                                     <div class="dropdown-divider"></div>

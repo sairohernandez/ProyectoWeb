@@ -93,6 +93,8 @@
                 <asp:Label ID="Label3" runat="server" Text="Total a Pagar"></asp:Label>
                 <asp:Label ID="lblTotalPago" runat="server"></asp:Label>
 
+                <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Procesar" />
+
             </div>
         </div>
     </div>

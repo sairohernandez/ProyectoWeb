@@ -30,7 +30,7 @@ namespace PrograWeb.Datos
 
             List<EPagos> listaPagos = new List<EPagos>();
 
-            for (int contador = prestamo.numeroCuotasAplicadas; contador < numeroPagos; contador++)
+            for (int contador = prestamo.numeroCuotasAplicadas; contador < (prestamo.numeroCuotasAplicadas+ numeroPagos); contador++)
             {
                 Epagos = new EPagos();
                 Epagos.numeroDocumentoPago = 0;
@@ -52,7 +52,7 @@ namespace PrograWeb.Datos
             }
             return listaPagos;
         }
-        bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos)
+       public bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos)
         {
 
             try
@@ -97,15 +97,15 @@ namespace PrograWeb.Datos
                         {
 
                             cmd.Parameters.Add("@codigoPago", MySqlDbType.Int32).Value = 0;
-                            cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = linea.codigoFactura;
+                            cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = prestamo.codigoFactura;
                             cmd.Parameters.Add("@fechaRegPago", MySqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
                             cmd.Parameters.Add("@numeroCuotaPago", MySqlDbType.Int32).Value = linea.numeroCuotaPago;
                             cmd.Parameters.Add("@numeroDocumentoPago", MySqlDbType.VarChar, 50).Value = linea.numeroDocumentoPago;
                             cmd.Parameters.Add("@montoAmortizacionPago", MySqlDbType.Double).Value = linea.montoAmortizacionPago;
                             cmd.Parameters.Add("@montoInteresesPago", MySqlDbType.Double).Value = linea.montoInteresesPago;
                             cmd.Parameters.Add("@montoPago", MySqlDbType.Double).Value = linea.montoPago;
-                            cmd.Parameters.Add("@fechaCuotaPago", MySqlDbType.DateTime).Value = DateTime.Today.ToString("yyyy-MM-dd");
-                            cmd.Parameters.Add("@codigoUsuarioPago", MySqlDbType.Int32).Value = 0;//Convert.ToInt32(Session["codigoUsuario"]);
+                            cmd.Parameters.Add("@fechaCuotaPago", MySqlDbType.DateTime).Value = linea.fechaCuotaPago.ToString("yyyy-MM-dd");
+                            cmd.Parameters.Add("@codigoUsuarioPago", MySqlDbType.Int32).Value = 1;//Convert.ToInt32(Session["codigoUsuario"]);
                             cmd.Parameters.Add("@nuevoSaldoCredito", MySqlDbType.Double).Value = linea.nuevoSaldoCredito;
 
                             cmd.CommandType = CommandType.Text;

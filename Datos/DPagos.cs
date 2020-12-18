@@ -35,16 +35,13 @@ namespace PrograWeb.Datos
                 Epagos = new EPagos();
                 Epagos.numeroDocumentoPago = 0;
                 Epagos.numeroCuotaPago += 1;
-                Epagos.montoAmortizacionPago = (((prestamo.montoCuotaFija * (30 / (prestamo.tasaCreditoFactura / 100))) - (prestamo.saldoFactura * 30)) / (30 / (prestamo.tasaCreditoFactura / 100)));
-                Epagos.montoInteresesPago = prestamo.saldoFactura * (prestamo.tasaCreditoFactura / 100);
+                Epagos.montoAmortizacionPago = (((prestamo.montoCuotaFija * (30 / (prestamo.tasaCreditoFactura / 100))) - (nuevoSaldo * 30)) / (30 / (prestamo.tasaCreditoFactura / 100)));
+                Epagos.montoInteresesPago = nuevoSaldo * (prestamo.tasaCreditoFactura / 100);
                 Epagos.montoPago = Epagos.montoAmortizacionPago + Epagos.montoInteresesPago;
-                proximFechaPago.AddMonths(1);
+                proximFechaPago=proximFechaPago.AddMonths(1);
                 Epagos.fechaCuotaPago = proximFechaPago;
 
-                nuevoSaldo = nuevoSaldo = Epagos.montoAmortizacionPago;
-
-                prestamo.fechaUltimaCuota = proximFechaPago; //Actualiza ultima fecha de pago factura
-                prestamo.saldoFactura = nuevoSaldo;          //Actualiza saldo de la factura
+                nuevoSaldo  -= Epagos.montoAmortizacionPago;
 
                 Epagos.nuevoSaldoCredito = nuevoSaldo;
 
@@ -52,14 +49,16 @@ namespace PrograWeb.Datos
             }
             return listaPagos;
         }
-       public bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos, int cuotasAplicadas)
+       public bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos, int cuotasAplicadas,int codigoUsuario)
         {
-
+            MySqlTransaction transaccion;
             try
             {
                 using (connection = new MySqlConnection(myConnectionString))
                 {
                     connection.Open();
+
+                    transaccion = connection.BeginTransaction();
 
                     string sql;
                     MySqlCommand cmd;
@@ -77,6 +76,7 @@ namespace PrograWeb.Datos
                         using (dta = new MySqlDataAdapter())
                         using (ds = new DataTable())
                         {
+                            cmd.Transaction = transaccion;
                             cmd.CommandType = CommandType.Text;
                             dta.SelectCommand = cmd;
                             dta.Fill(ds);
@@ -95,7 +95,7 @@ namespace PrograWeb.Datos
                         using (cmd = new MySqlCommand(sql, connection))
 
                         {
-
+                            cmd.Transaction = transaccion;
                             cmd.Parameters.Add("@codigoPago", MySqlDbType.Int32).Value = 0;
                             cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = prestamo.codigoFactura;
                             cmd.Parameters.Add("@fechaRegPago", MySqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
@@ -105,7 +105,7 @@ namespace PrograWeb.Datos
                             cmd.Parameters.Add("@montoInteresesPago", MySqlDbType.Double).Value = linea.montoInteresesPago;
                             cmd.Parameters.Add("@montoPago", MySqlDbType.Double).Value = linea.montoPago;
                             cmd.Parameters.Add("@fechaCuotaPago", MySqlDbType.DateTime).Value = linea.fechaCuotaPago.ToString("yyyy-MM-dd");
-                            cmd.Parameters.Add("@codigoUsuarioPago", MySqlDbType.Int32).Value = 1;//Convert.ToInt32(Session["codigoUsuario"]);
+                            cmd.Parameters.Add("@codigoUsuarioPago", MySqlDbType.Int32).Value = codigoUsuario;//Convert.ToInt32(Session["codigoUsuario"]);
                             cmd.Parameters.Add("@nuevoSaldoCredito", MySqlDbType.Double).Value = linea.nuevoSaldoCredito;
 
                             cmd.CommandType = CommandType.Text;
@@ -124,10 +124,10 @@ namespace PrograWeb.Datos
                     using (cmd = new MySqlCommand(sql, connection))
 
                     {
-
+                        cmd.Transaction = transaccion;
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = prestamo.codigoFactura;
                         cmd.Parameters.Add("@fechaUltimaCuota", MySqlDbType.DateTime).Value = pagos[pagos.Count-1].fechaCuotaPago.ToString("yyyy-MM-dd hh:mm:ss");
-                        cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double).Value = prestamo.saldoFactura;
+                        cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double).Value = pagos[pagos.Count - 1].nuevoSaldoCredito;
                         cmd.Parameters.Add("@numeroCuotasAplicadas", MySqlDbType.Int32).Value = cuotasAplicadas;
                      
 
@@ -135,7 +135,7 @@ namespace PrograWeb.Datos
                         cmd.ExecuteNonQuery();
 
                     }
-
+                    transaccion.Commit();
                     connection.Close();
                 }
 
@@ -145,6 +145,12 @@ namespace PrograWeb.Datos
 
             catch (Exception ex)
             {
+
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
                 string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 
                 // Agregar texto a la bitacora

@@ -11,26 +11,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="contentPlaceHolder" runat="server">
     <div class="content">
 
-        <script type="text/javascript">
-
-            //$(function () {
-
-           <%--     $("#<%=txtIdentificacion.ClientID %>").keydown(function (e) {
-
-                    if (e.keyCode == 13) {
-
-                        <%CargarPrestamos();%>
-
-                    }
-
-                });--%>
-
-            //});
-
-        </script>
-
-
-        <div class="card-group">
+         <div class="card-group">
 
             <div class="card">
                 <div class="card-body text-dark">
@@ -83,21 +64,17 @@
             <div class="card">
 
                 <div class="card-body text-dark">
+
+
+
                     <div class="form-group row">
                         <div class="col-4">
-                            <asp:Label ID="Label7" runat="server" Text="Fecha Última Pago"></asp:Label>
+                            <asp:Label ID="Label12" runat="server" Text="Fecha Formalización"></asp:Label>
                         </div>
                         <div class="col-3">
-                            <asp:Label ID="lblFechaUltimaCuota" runat="server"></asp:Label>
+                            <asp:Label ID="lblFechaFormacion" Font-Bold="true" runat="server"></asp:Label>
                         </div>
 
-                        <div class="col-3">
-                            <asp:Label ID="Label10" text="Saldo Cuotas" runat="server"></asp:Label>
-                        </div>
-
-                               <div class="col-2">
-                            <asp:Label ID="lblSaldoCuotas" runat="server"></asp:Label>
-                        </div>
 
                     </div>
 
@@ -106,11 +83,29 @@
                             <asp:Label ID="Label8" runat="server" Text="Vencimiento crédito"></asp:Label>
                         </div>
                         <div class="col-3">
-                            <asp:Label ID="lblFechaVencimiento" runat="server"></asp:Label>
+                            <asp:Label ID="lblFechaVencimiento" Font-Bold="true" runat="server"></asp:Label>
                         </div>
 
 
                     </div>
+                    <div class="form-group row">
+                        <div class="col-4">
+                            <asp:Label ID="Label7" runat="server" Text="Fecha Última Pago"></asp:Label>
+                        </div>
+                        <div class="col-3">
+                            <asp:Label ID="lblFechaUltimaCuota" Font-Bold="true" runat="server"></asp:Label>
+                        </div>
+
+                        <div class="col-3">
+                            <asp:Label ID="Label10" Text="Saldo Cuotas" runat="server"></asp:Label>
+                        </div>
+
+                        <div class="col-2">
+                            <asp:Label ID="lblSaldoCuotas" Font-Bold="true" runat="server"></asp:Label>
+                        </div>
+
+                    </div>
+
 
                     <div class="form-group row">
 
@@ -118,7 +113,7 @@
                             <asp:Label ID="Label4" runat="server" Text="Amortización"></asp:Label>
                         </div>
                         <div class="col-3">
-                            <asp:Label ID="lblTotalAmortizacion" runat="server"></asp:Label>
+                            <asp:Label ID="lblTotalAmortizacion" Font-Bold="true" runat="server"></asp:Label>
                         </div>
 
                     </div>
@@ -128,17 +123,27 @@
                             <asp:Label ID="Label6" runat="server" Text="Intereses"></asp:Label>
                         </div>
                         <div class="col-3">
-                            <asp:Label ID="lblTotalIntereses" runat="server"></asp:Label>
+                            <asp:Label ID="lblTotalIntereses" Font-Bold="true" runat="server"></asp:Label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="col-4" style="float: right">
+                            <asp:Label ID="Label3" runat="server" Text="Total a Pagar"></asp:Label>
+                        </div>
+                        <div class="col-3">
+                            <asp:Label ID="lblTotalPago" Font-Bold="true" runat="server"></asp:Label>
                         </div>
                     </div>
 
                     <div class="form-group row">
                         <div class="col-4">
-                            <asp:Label ID="Label3" runat="server" Text="Total a Pagar"></asp:Label>
+                            <asp:Label ID="Label11" runat="server" Text="Nuevo Saldo"></asp:Label>
                         </div>
                         <div class="col-3">
-                            <asp:Label ID="lblTotalPago" runat="server"></asp:Label>
+                            <asp:Label ID="lblNuevoSaldo" Font-Bold="true" runat="server"></asp:Label>
                         </div>
+
                     </div>
 
                 </div>
@@ -146,7 +151,12 @@
 
         </div>
 
-        <asp:Button ID="btnGuardar" runat="server" OnClick="btnGuardar_Click" Text="Procesar" />
+
+    </div>
+
+    <div class="card-footer text-center">
+        <asp:Button ID="btnGuardar" class="btn btn-success" runat="server" OnClick="btnGuardar_Click" Text="Procesar" />
+        <asp:Button ID="btnCancelar" class="btn btn-danger" runat="server" OnClick="btnCancelar_Click" Text="Cancelar" />
     </div>
 
 

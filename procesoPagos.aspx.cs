@@ -47,7 +47,7 @@ namespace PrograWeb
         {
 
             CargarPrestamos();
-            calculaCuotras();
+            calculaCuotas();
         }
 
         public void CalculaTotalPago()
@@ -71,11 +71,11 @@ namespace PrograWeb
         {
 
 
-            calculaCuotras();
+            calculaCuotas();
 
         }
 
-        void calculaCuotras()
+        void calculaCuotas()
         {
 
             if (cmbPrestamos.Items.Count > 0)
@@ -107,7 +107,10 @@ namespace PrograWeb
                             CalculaTotalPago();
                             lblSaldoCuotas.Text = (listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura - listaCreditos[cmbPrestamos.SelectedIndex].numeroCuotasAplicadas).ToString();
                             lblSaldoFactura.Text = listaCreditos[cmbPrestamos.SelectedIndex].saldoFactura.ToString("C2");
+                            lblNuevoSaldo.Text = listaPagos[listaPagos.Count - 1].nuevoSaldoCredito.ToString("C2");
                             lblFechaUltimaCuota.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaUltimaCuota.ToString("dd/MM/yyyy");
+                            lblFechaUltimaCuota.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaUltimaCuota.ToString("dd/MM/yyyy");
+                            lblFechaFormacion.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaRegFactura.ToString("dd/MM/yyyy");
                             lblFechaVencimiento.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaRegFactura.AddMonths(listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura).ToString("dd/MM/yyyy");
 
                             Session["pagos"] = listaPagos;
@@ -124,12 +127,13 @@ namespace PrograWeb
             dpagos = new DPagos();
             listaCreditos = (List<EFacturaEncabezado>)Session["prestamos"];
             listaPagos = (List<EPagos>)Session["pagos"];
-            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos,Convert.ToInt32(txtNumeroCuotas.Text)))
+            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos,Convert.ToInt32(txtNumeroCuotas.Text), Convert.ToInt32(Session["codigoUsuario"])))
             {
                 string script = "mensajePagoOk();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
               
                 LimpiarInterfaz();
+                txtIdentificacion.Text = "";
             }
             else
             {
@@ -140,15 +144,17 @@ namespace PrograWeb
 
         void LimpiarInterfaz()
         {
-            //txtIdentificacion.Text = "";
+           
             lblTotalAmortizacion.Text = "";
             lblTotalIntereses.Text = "";
             lblTotalPago.Text = "";
+            lblNuevoSaldo.Text = "";
             cmbPrestamos.Items.Clear();
             cmbPrestamos.DataSource = null;
             lblSaldoFactura.Text = "";
             lblFechaUltimaCuota.Text = "";
             lblFechaVencimiento.Text = "";
+            lblFechaFormacion.Text = "";
             Session["prestamos"] = null;
             Session["pagos"] = null;
         }
@@ -160,7 +166,13 @@ namespace PrograWeb
 
         protected void txtNumeroCuotas_TextChanged(object sender, EventArgs e)
         {
-            calculaCuotras();
+            calculaCuotas();
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            LimpiarInterfaz();
+            txtIdentificacion.Text = "";
         }
     }
 }

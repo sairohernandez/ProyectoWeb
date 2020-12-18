@@ -50,10 +50,11 @@ namespace PrograWeb
             DataTable ds;
 
             sql =   "Select numeroFactura,fechaRegFactura,totalFactura,cantidadDetalle," +
-                    "precioDetalle,impuestoDetalle,nombreArticulo from Factura_Encabezado " +
+                    "precioDetalle,impuestoDetalle,nombreArticulo,identificacionUsuario,nombreUsuario from Factura_Encabezado " +
                     "join Factura_Detalle on Factura_Encabezado.codigoFactura = Factura_Detalle.codigoFactura "+
                     "join Articulo on Factura_Detalle.codigoArticulo = Articulo.idArticulo "+
-                    "where DATE(fechaRegFactura)    BETWEEN   @fechaIncial AND @fechaFinal; ";
+                    "join Usuarios on Factura_Encabezado.codigoUsuarioFactura = Usuarios.codigoUsuario "+
+                    "where DATE(fechaRegFactura)  BETWEEN   @fechaIncial AND @fechaFinal; ";
 
             using (connection = new MySqlConnection(myConnectionString))
             { 
@@ -76,8 +77,8 @@ namespace PrograWeb
 
 
                 ReportParameter[] parameters = new ReportParameter[2];
-                parameters[0] = new ReportParameter("prmFechaInicial", DateTime.Today.ToString ("dd/MM/yyyy"));
-                parameters[1] = new ReportParameter("prmFechaFinal", DateTime.Today.ToString("dd/MM/yyyy"));
+                parameters[0] = new ReportParameter("prmFechaInicial", txtFechaInicial.Text);
+                parameters[1] = new ReportParameter("prmFechaFinal", txtFechaFinal.Text);
 
                 
 

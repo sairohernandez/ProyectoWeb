@@ -57,7 +57,7 @@ namespace PrograWeb.Datos
 
                     string sql;
 
-                    sql = "update Usuarios set estadousuario = @estadousuario where codigoUsuario = @codigoUsuario";
+                    sql = "update Usuarios set estadousuario = @estadousuario, claveUsuario=123 where codigoUsuario = @codigoUsuario";
 
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, connection))

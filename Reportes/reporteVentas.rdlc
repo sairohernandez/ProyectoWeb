@@ -5,6 +5,7 @@
   <DataSources>
     <DataSource Name="DataSource">
       <DataSourceReference>DataSource</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
       <rd:DataSourceID>8b80bde6-a0e6-4f57-b194-087aab9d180e</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -12,9 +13,10 @@
     <DataSet Name="dsVentas">
       <Query>
         <DataSourceName>DataSource</DataSourceName>
-        <CommandText>Select numeroFactura,fechaRegFactura,totalFactura,cantidadDetalle,precioDetalle,impuestoDetalle,nombreArticulo from Factura_Encabezado
+        <CommandText>Select numeroFactura,fechaRegFactura,totalFactura,cantidadDetalle,precioDetalle,impuestoDetalle,nombreArticulo,identificacionUsuario,nombreUsuario from Factura_Encabezado
 join Factura_Detalle on Factura_Encabezado.codigoFactura = Factura_Detalle.codigoFactura
 join Articulo on Factura_Detalle.codigoArticulo = Articulo.idArticulo
+join Usuarios on Factura_Encabezado.codigoUsuarioFactura = Usuarios.codigoUsuario
 where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
       </Query>
       <Fields>
@@ -45,6 +47,14 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
         <Field Name="totalFactura">
           <DataField>totalFactura</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="identificacionUsuario">
+          <DataField>identificacionUsuario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="nombreUsuario">
+          <DataField>nombreUsuario</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>
     </DataSet>
@@ -152,9 +162,9 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>Cliente</Value>
                                   <Style>
-                                    <FontFamily>Arial</FontFamily>
+                                    <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -513,14 +523,14 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox44">
+                        <Textbox Name="nombreUsuario">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
+                                  <Value>=Fields!nombreUsuario.Value</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                   </Style>
@@ -529,7 +539,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox44</rd:DefaultName>
+                          <rd:DefaultName>nombreUsuario</rd:DefaultName>
                           <Style>
                             <Border>
                               <Style>None</Style>
@@ -754,7 +764,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontSize>8pt</FontSize>
-                                    <Format>C2</Format>
+                                    <Format>N2</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -1078,7 +1088,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>Total Factura</Value>
+                                  <Value>Totales Factura</Value>
                                   <Style>
                                     <FontFamily>Arial</FontFamily>
                                     <FontSize>9pt</FontSize>
@@ -1857,7 +1867,7 @@ where fechaRegFactura BETWEEN   '2020-01-01' AND '2021-01-01'</CommandText>
         <Height>2.83643in</Height>
         <Style />
       </Body>
-      <Width>9.10267in</Width>
+      <Width>9.16517in</Width>
       <Page>
         <PageHeight>27.94cm</PageHeight>
         <PageWidth>21.59cm</PageWidth>

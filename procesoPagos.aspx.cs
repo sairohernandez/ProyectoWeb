@@ -63,7 +63,7 @@ namespace PrograWeb
                 totalPago += pago.montoPago;
             }
             lblTotalAmortizacion.Text = totalAmortizacion.ToString("C2");
-            lblTotalAmortizacion.Text = totalIntereses.ToString("C2");
+            lblTotalIntereses.Text = totalIntereses.ToString("C2");
             lblTotalPago.Text = totalPago.ToString("C2");
         }
 
@@ -90,16 +90,28 @@ namespace PrograWeb
                     dpagos = new DPagos();
                     listaCreditos = (List<EFacturaEncabezado>)Session["prestamos"];
 
-                    if (listaCreditos.Count > 0)
+                    if (Convert.ToInt32(txtNumeroCuotas.Text) > listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura - listaCreditos[cmbPrestamos.SelectedIndex].numeroCuotasAplicadas)
+
+                    {
+                        string script = "validacionCantidadCuotas();";
+                        ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
+
+                    }
+                    else
                     {
 
-                        listaPagos = dpagos.CalculaPagos(listaCreditos[cmbPrestamos.SelectedIndex], Convert.ToInt32(txtNumeroCuotas.Text));
-                        CalculaTotalPago();
-                        lblSaldoFactura.Text = listaCreditos[cmbPrestamos.SelectedIndex].saldoFactura.ToString("C2");
-                        lblFechaUltimaCuota.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaUltimaCuota.ToString("dd/MM/yyyy");
-                        lblFechaVencimiento.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaRegFactura.AddMonths(listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura).ToString("dd/MM/yyyy");
+                        if (listaCreditos.Count > 0)
+                        {
 
-                        Session["pagos"] = listaPagos;
+                            listaPagos = dpagos.CalculaPagos(listaCreditos[cmbPrestamos.SelectedIndex], Convert.ToInt32(txtNumeroCuotas.Text));
+                            CalculaTotalPago();
+                            lblSaldoCuotas.Text = (listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura - listaCreditos[cmbPrestamos.SelectedIndex].numeroCuotasAplicadas).ToString();
+                            lblSaldoFactura.Text = listaCreditos[cmbPrestamos.SelectedIndex].saldoFactura.ToString("C2");
+                            lblFechaUltimaCuota.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaUltimaCuota.ToString("dd/MM/yyyy");
+                            lblFechaVencimiento.Text = listaCreditos[cmbPrestamos.SelectedIndex].fechaRegFactura.AddMonths(listaCreditos[cmbPrestamos.SelectedIndex].plazoPaFactura).ToString("dd/MM/yyyy");
+
+                            Session["pagos"] = listaPagos;
+                        }
                     }
                 }
             }
@@ -112,12 +124,12 @@ namespace PrograWeb
             dpagos = new DPagos();
             listaCreditos = (List<EFacturaEncabezado>)Session["prestamos"];
             listaPagos = (List<EPagos>)Session["pagos"];
-            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos))
+            if (dpagos.GuardarPagos(listaCreditos[cmbPrestamos.SelectedIndex], listaPagos,Convert.ToInt32(txtNumeroCuotas.Text)))
             {
                 string script = "mensajePagoOk();";
                 ScriptManager.RegisterStartupScript(this, GetType(), "ServerControlScript", script, true);
-                Session["prestamos"] = null;
-                Session["pagos"] = null;
+              
+                LimpiarInterfaz();
             }
             else
             {
@@ -128,7 +140,27 @@ namespace PrograWeb
 
         void LimpiarInterfaz()
         {
+            //txtIdentificacion.Text = "";
+            lblTotalAmortizacion.Text = "";
+            lblTotalIntereses.Text = "";
+            lblTotalPago.Text = "";
+            cmbPrestamos.Items.Clear();
             cmbPrestamos.DataSource = null;
+            lblSaldoFactura.Text = "";
+            lblFechaUltimaCuota.Text = "";
+            lblFechaVencimiento.Text = "";
+            Session["prestamos"] = null;
+            Session["pagos"] = null;
+        }
+
+        protected void txtIdentificacion_TextChanged(object sender, EventArgs e)
+        {
+            LimpiarInterfaz();
+        }
+
+        protected void txtNumeroCuotas_TextChanged(object sender, EventArgs e)
+        {
+            calculaCuotras();
         }
     }
 }

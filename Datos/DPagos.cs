@@ -52,7 +52,7 @@ namespace PrograWeb.Datos
             }
             return listaPagos;
         }
-       public bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos)
+       public bool GuardarPagos(EFacturaEncabezado prestamo, List<EPagos> pagos, int cuotasAplicadas)
         {
 
             try
@@ -117,7 +117,7 @@ namespace PrograWeb.Datos
                     //Actualizar los datos de la factura
 
 
-                    sql = "UPDATE   Factura_Encabezado SET fechaUltimaCuota = @fechaUltimaCuota, saldoFactura = @saldoFactura " +
+                    sql = "UPDATE   Factura_Encabezado SET fechaUltimaCuota = @fechaUltimaCuota, saldoFactura = @saldoFactura, numeroCuotasAplicadas = numeroCuotasAplicadas + @numeroCuotasAplicadas " +
                          "WHERE codigoFactura =  @codigoFactura;";
 
 
@@ -126,8 +126,10 @@ namespace PrograWeb.Datos
                     {
 
                         cmd.Parameters.Add("@codigoFactura", MySqlDbType.Int32).Value = prestamo.codigoFactura;
-                        cmd.Parameters.Add("@fechaUltimaCuota", MySqlDbType.DateTime).Value = DateTime.Now.ToString("yyyy-MM-dd hh:mm:ss");
+                        cmd.Parameters.Add("@fechaUltimaCuota", MySqlDbType.DateTime).Value = pagos[pagos.Count-1].fechaCuotaPago.ToString("yyyy-MM-dd hh:mm:ss");
                         cmd.Parameters.Add("@saldoFactura", MySqlDbType.Double).Value = prestamo.saldoFactura;
+                        cmd.Parameters.Add("@numeroCuotasAplicadas", MySqlDbType.Int32).Value = cuotasAplicadas;
+                     
 
                         cmd.CommandType = CommandType.Text;
                         cmd.ExecuteNonQuery();
@@ -167,7 +169,7 @@ namespace PrograWeb.Datos
             List<EFacturaEncabezado> listaFactura;
 
 
-            sql = " select codigoFactura,codigoUsuarioFactura,numeroFactura,fechaRegFactura,montoCuotaFija,tasaCreditoFactura,fechaUltimaCuota,plazoPaFactura, saldoFactura " +
+            sql = " select codigoFactura,codigoUsuarioFactura,numeroFactura,fechaRegFactura,montoCuotaFija,tasaCreditoFactura,fechaUltimaCuota,plazoPaFactura,numeroCuotasAplicadas, saldoFactura " +
                            " from Factura_Encabezado where codigoUsuarioFactura = @codigoUsuario and saldoFactura > 0;";
 
             using (cmd = new MySqlCommand(sql, connection))
@@ -191,6 +193,8 @@ namespace PrograWeb.Datos
                         factura.fechaRegFactura = Convert.ToDateTime(ds.Rows[contador]["fechaRegFactura"]);
                         factura.montoCuotaFija = Convert.ToDouble(ds.Rows[contador]["montoCuotaFija"]);
                         factura.tasaCreditoFactura = Convert.ToInt32(ds.Rows[contador]["tasaCreditoFactura"]);
+                        factura.plazoPaFactura = Convert.ToInt32(ds.Rows[contador]["plazoPaFactura"]);
+                        factura.numeroCuotasAplicadas = Convert.ToInt32(ds.Rows[contador]["numeroCuotasAplicadas"]);
                         factura.numeroFactura = Convert.ToString(ds.Rows[contador]["numeroFactura"]);
                         factura.saldoFactura = Convert.ToDouble(ds.Rows[contador]["saldoFactura"]);
                         factura.fechaUltimaCuota = Convert.ToDateTime(ds.Rows[contador]["fechaUltimaCuota"]);

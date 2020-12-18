@@ -2,13 +2,12 @@
 
 function msEnvioFactura() {
 	//swal("", "Su compra ha sido procesada correctamente", "success");
-	swal("","Su compra ha sido procesada correctamente", "success")
+	swal("","Gracias por su compra!!!, pronto estaremos en contacto con usted.", "success")
 		.then((value) => {
 			window.location.href = "Default.aspx";
 		});
 	
 }
-
 
 function mensajeCorrecto() {
 	swal("", "La solicitud ha sido enviada correctamente", "success");
@@ -28,4 +27,7 @@ function mensajePagoOk() {
 }
 
 
+function validacionCantidadCuotas() {
+	swal("", "El número de cuotas supera la cantidad de cuotas pendientes", "warning");
+}
 
